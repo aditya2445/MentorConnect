@@ -3,6 +3,7 @@ import OTPInput from 'react-otp-input'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
 import { sendOtp, signup } from '../services/operations/authApi'
+import {FaLongArrowAltLeft} from 'react-icons/fa'
 
 const VerifyEmail = () => {
     const {loading,signupData} = useSelector(state=>state.auth)
