@@ -3,6 +3,10 @@ const app = express()
 const cors =require('cors')
 const cookieParser = require("cookie-parser")
 const { dbConnect } = require("./config/database")
+const {cloudinaryConnect} = require("./config/cloudinary")
+const userRoutes = require('./routes/userRoutes')
+const fileUpload = require("express-fileupload")
+const dotenv = require("dotenv");
 
 app.use(express.json())
 app.use(cookieParser())
@@ -11,9 +15,16 @@ app.use(cors({
     credentials:true
 }))
 
+app.use(
+    fileUpload({
+        useTempFiles:true,
+        credentials:true,
+    })
+)
+cloudinaryConnect();
+
 dbConnect();
 //routes
-const userRoutes = require('./routes/userRoutes')
 app.use("/api/v1/auth",userRoutes)
 
 app.listen(process.env.PORT,()=>{
