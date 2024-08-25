@@ -4,12 +4,13 @@ import Home from './pages/Home'
 import LogIn from './pages/LogIn'
 import SignUp from './pages/SignUp'
 import Navbar from './components/Navbar'
+import VerifyEmail from './pages/VerifyEmail'
 
 
 function App() {
 
     const location = useLocation();
-    const hideNavbarRoutes = ['/login', '/signup'];
+    const hideNavbarRoutes = ['/login', '/signup','/verifyEmail'];
 
   return (
     <>
@@ -18,6 +19,7 @@ function App() {
       <Route path='/' element={<Home/>} />
       <Route path='/login' element={<LogIn/>} />
       <Route path='/signup' element={<SignUp/>} />
+      <Route path='/verifyEmail' element={<VerifyEmail/>}/>
     </Routes>
     </>
   )

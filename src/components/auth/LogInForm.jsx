@@ -3,20 +3,23 @@ import {useForm} from 'react-hook-form'
 import { FcGoogle } from "react-icons/fc";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from '../../services/operations/authApi';
 
 const LogInForm = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const {
         register,
         handleSubmit,
-        formState:{errors}
+        formState:{errors},
+        reset
     } = useForm()
 
     const onSubmit = (data)=>{
-    const formData = new FormData()
-    formData.append("email",data.email)
-    formData.append("password",data.password)
-    console.log(data)
+    dispatch(login(data.email,data.password,navigate))
+    reset();
     }
     
     const [showpass, setshowpass] = useState(false)
