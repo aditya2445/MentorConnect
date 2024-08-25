@@ -3,24 +3,28 @@ import {useForm} from 'react-hook-form'
 import { FcGoogle } from "react-icons/fc";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setSignupData } from '../../slice/authSlice';
+import { sendOtp } from '../../services/operations/authApi';
 
 const SignUpForm = () => {
   const {
     register,
     handleSubmit,
-    formState:{errors}
+    formState:{errors},
+    reset
 } = useForm()
 
 const [showpass, setshowpass] = useState(false)
+const dispatch = useDispatch()
+const navigate = useNavigate()
 
 const onSubmit = (data)=>{
-  const formData = new FormData
-  formData.append("firstName",data.firstName)
-  formData.append("lastName",data.lastName)
-  formData.append("email",data.email)
-  formData.append("password",data.password)
-  console.log(data)
+
+  dispatch(setSignupData({...data,accountType:"Mentee"}))
+  dispatch(sendOtp(data.email,navigate))
+  reset()
 }
   return (
     <div className='flex flex-col gap-y-3 lg:w-[40%] flex-wrap p-5'>
