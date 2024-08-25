@@ -1,12 +1,24 @@
-import { useState } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import './App.css'
+import Home from './pages/Home'
+import LogIn from './pages/LogIn'
+import SignUp from './pages/SignUp'
+import Navbar from './components/Navbar'
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
+    const location = useLocation();
+    const hideNavbarRoutes = ['/login', '/signup'];
 
   return (
     <>
-    <p className='bg-green-500'>hello</p>
+   {!hideNavbarRoutes.includes(location.pathname) && <Navbar />}
+    <Routes>
+      <Route path='/' element={<Home/>} />
+      <Route path='/login' element={<LogIn/>} />
+      <Route path='/signup' element={<SignUp/>} />
+    </Routes>
     </>
   )
 }
