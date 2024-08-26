@@ -6,6 +6,8 @@ const { dbConnect } = require("./config/database")
 const {cloudinaryConnect} = require("./config/cloudinary")
 const userRoutes = require('./routes/userRoutes')
 const profileRoutes = require('./routes/profileRoutes')
+const chatRoutes = require('./routes/chatRoutes')
+const messageRoutes = require('./routes/messageRoutes')
 const fileUpload = require("express-fileupload")
 const session = require("express-session");
 const passport = require("passport");
@@ -41,6 +43,8 @@ dbConnect();
 //routes
 app.use("/api/v1/auth",userRoutes)
 app.use("/api/v1/profile", profileRoutes);
+app.use("/api/v1/chat", chatRoutes);
+app.use("/api/v1/message", messageRoutes);
 
 app.listen(process.env.PORT,()=>{
     console.log("server is online")
