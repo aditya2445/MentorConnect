@@ -2,12 +2,12 @@ const mongoose = require("mongoose")
 
 const sessionSchema = new mongoose.Schema({
     mentor:{
-        type:mongoose.Types.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:"User",
         required:true,
     },
     mentee:{
-        type:mongoose.Types.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:"User",
         required:true,
     },

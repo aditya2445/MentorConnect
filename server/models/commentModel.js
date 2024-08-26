@@ -5,11 +5,11 @@ const commentSchema = new mongoose.Schema({
         required:true
     },
     post:{
-        type:Schema.Types.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:"Post",
     },
     owner:{
-        type:Schema.Types.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:"User",
     }
 },
