@@ -25,4 +25,4 @@ const resumeReviewSchema = new mongoose.Schema({
 
 const ResumeReview = mongoose.model("ResumeReview",resumeReviewSchema);
 
-module.exports = {ResumeReview};
+module.exports = ResumeReview;

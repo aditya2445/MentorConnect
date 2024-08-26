@@ -15,4 +15,4 @@ const likeSchema = new mongoose.Schema({
 },{timestamps:true});
 
 const Like = mongoose.model("Like",likeSchema);
-module.exports = {Like};
+module.exports = Like;

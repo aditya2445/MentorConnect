@@ -28,4 +28,4 @@ const liveStreamingSchema = new mongoose.Schema({
 
 const LiveStreaming = mongoose.model("LiveStreaming",liveStreamingSchema);
 
-module.exports = {LiveStreaming};
+module.exports = LiveStreaming;
