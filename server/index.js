@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser")
 const { dbConnect } = require("./config/database")
 const {cloudinaryConnect} = require("./config/cloudinary")
 const userRoutes = require('./routes/userRoutes')
+const profileRoutes = require('./routes/profileRoutes')
 const fileUpload = require("express-fileupload")
 const dotenv = require("dotenv");
 
@@ -26,6 +27,7 @@ cloudinaryConnect();
 dbConnect();
 //routes
 app.use("/api/v1/auth",userRoutes)
+app.use("/api/v1/profile", profileRoutes);
 
 app.listen(process.env.PORT,()=>{
     console.log("server is online")
