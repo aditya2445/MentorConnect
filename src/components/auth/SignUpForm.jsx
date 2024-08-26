@@ -1,13 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useForm} from 'react-hook-form'
 import { FcGoogle } from "react-icons/fc";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setSignupData } from '../../slice/authSlice';
 import { sendOtp } from '../../services/operations/authApi';
+import toast from 'react-hot-toast';
 
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
+  
 const SignUpForm = () => {
   const {
     register,
@@ -15,6 +20,14 @@ const SignUpForm = () => {
     formState:{errors},
     reset
 } = useForm()
+const query = useQuery();
+
+useEffect(()=>{
+    if(query.get('err')){
+        const container = document.getElementById('container')
+        container.style.opacity='1' 
+    }
+},[query])
 
 const [showpass, setshowpass] = useState(false)
 const dispatch = useDispatch()
@@ -25,6 +38,10 @@ const onSubmit = (data)=>{
   dispatch(setSignupData({...data,accountType:"Mentee"}))
   dispatch(sendOtp(data.email,navigate))
   reset()
+}
+
+const signupHandler = async()=>{
+    window.location.href = "http://localhost:3000/api/v1/auth/google/signup?action=signup"
 }
   return (
     <div className='flex flex-col gap-y-3 lg:w-[40%] flex-wrap p-5'>
@@ -105,7 +122,8 @@ const onSubmit = (data)=>{
             OR
             <div className=' border-[1px] w-[40%]'></div>
             </div>
-            <button className='border-[1px] h-[40px] rounded-md w-full px-3 flex items-center justify-center gap-2 font-semibold' type='button'><FcGoogle className='text-xl'/> Sign up with Google</button>   
+            <button onClick={signupHandler} className='border-[1px] h-[40px] rounded-md w-full px-3 flex items-center justify-center gap-2 font-semibold' type='button'><FcGoogle className='text-xl'/> Sign up with Google</button>  
+            <div id='container' className={` opacity-0 bg-gradient-to-r from-[#db8d8d] to-[#d3939333]`}>Account already exist</div> 
   </form>
   <div>Already have an account? <Link to={"/login"} className='text-teal-400'><u>Log in</u></Link></div>
   <div className='text-teal-400'><u>Apply to be a Mentor?</u></div>

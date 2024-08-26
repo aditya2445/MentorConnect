@@ -70,3 +70,16 @@ export function login(email,password,navigate){
           dispatch(setLoading(false))
     }
 }
+
+export function logOut(navigate){
+  return async(dispatch)=>{
+   dispatch(setLoading(true))
+   dispatch(setUser(null))
+   dispatch(setToken(null))
+   localStorage.removeItem("token")
+   localStorage.removeItem("user")
+   toast.success("logout successful")
+   navigate("/")
+   dispatch(setLoading(false))
+  }
+}
