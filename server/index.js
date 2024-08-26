@@ -6,10 +6,23 @@ const { dbConnect } = require("./config/database")
 const {cloudinaryConnect} = require("./config/cloudinary")
 const userRoutes = require('./routes/userRoutes')
 const fileUpload = require("express-fileupload")
+const session = require("express-session");
+const passport = require("passport");
 const dotenv = require("dotenv");
+require('./controllers/google')
 
 app.use(express.json())
 app.use(cookieParser())
+
+app.use(session({
+    secret: "cyberwolve",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } 
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(cors({
     origin:"http://localhost:5173",
     credentials:true
