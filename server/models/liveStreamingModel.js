@@ -26,6 +26,6 @@ const liveStreamingSchema = new mongoose.Schema({
     },
 },{timestamps:true});
 
-const LiveStreamingSchema = mongoose.model("LiveStreamingSchema",liveStreamingSchema);
+const LiveStreaming = mongoose.model("LiveStreaming",liveStreamingSchema);
 
-module.exports = {LiveStreamingSchema};
+module.exports = {LiveStreaming};
