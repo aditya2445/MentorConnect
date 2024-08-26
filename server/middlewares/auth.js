@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken")
 require('dotenv').config();
 
-const User = require('../models/user.model');
+const User = require('../models/User');
 const authMiddleware = async(req,res,next)=>{
     try {
-        const token = req.header('Authorization')?.replace('Bearer', '') || req.cookies?.token;
+        const token = req.header('Authorization')?.replace('Bearer ', '') || req.cookies?.token;
         if (!token) {
             return res.status(401).json({ message: 'Access denied. No token provided.' });
           }
