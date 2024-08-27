@@ -8,6 +8,7 @@ const userRoutes = require('./routes/userRoutes')
 const profileRoutes = require('./routes/profileRoutes')
 const chatRoutes = require('./routes/chatRoutes')
 const messageRoutes = require('./routes/messageRoutes')
+const sessionRoutes = require('./routes/sessionRoutes')
 const fileUpload = require("express-fileupload")
 const session = require("express-session");
 const passport = require("passport");
@@ -45,6 +46,7 @@ app.use("/api/v1/auth",userRoutes)
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/chat", chatRoutes);
 app.use("/api/v1/message", messageRoutes);
+app.use("/api/v1/session", sessionRoutes);
 
 app.listen(process.env.PORT,()=>{
     console.log("server is online")
