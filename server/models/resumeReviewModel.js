@@ -8,7 +8,6 @@ const resumeReviewSchema = new mongoose.Schema({
     mentor: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true 
     },
     resumeUrl:{
         type:String,
@@ -19,7 +18,7 @@ const resumeReviewSchema = new mongoose.Schema({
     },
     status:{
         type:String,
-        enum:["O","E","A"],
+        enum:["O","E","A","NULL"],
     }
 },{timestamps:true})
 
