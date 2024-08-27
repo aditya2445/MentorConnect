@@ -10,6 +10,7 @@ const chatRoutes = require('./routes/chatRoutes')
 const messageRoutes = require('./routes/messageRoutes')
 const sessionRoutes = require('./routes/sessionRoutes')
 const resumeRoutes = require('./routes/resumeRoutes')
+const ratingReview = require('./routes/ratingReview')
 const fileUpload = require("express-fileupload")
 const session = require("express-session");
 const passport = require("passport");
@@ -49,6 +50,7 @@ app.use("/api/v1/chat", chatRoutes);
 app.use("/api/v1/message", messageRoutes);
 app.use("/api/v1/session", sessionRoutes);
 app.use("/api/v1/resume", resumeRoutes);
+app.use("/api/v1/rating", ratingReview);
 
 app.listen(process.env.PORT,()=>{
     console.log("server is online")
