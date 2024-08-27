@@ -16,7 +16,7 @@ const sessionSchema = new mongoose.Schema({
         required:true,
     },
     date:{
-        type:date,
+        type:Date,
         required:true,
     },
     status:{
@@ -26,7 +26,6 @@ const sessionSchema = new mongoose.Schema({
     },
     feedback:{
         type:String,
-        required:true,
     }
 },{timestamps:true})
 
