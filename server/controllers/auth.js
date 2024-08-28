@@ -54,7 +54,7 @@ exports.sendOtp = async(req,res)=>{
 
 }
 
-exports.signUp=async(req,res)=>{
+exports.signUp = async(req,res)=>{
 
     try {
        
@@ -189,3 +189,4 @@ try {
 }
 
 }
+

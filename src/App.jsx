@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp'
 import Navbar from './components/Navbar'
 import VerifyEmail from './pages/VerifyEmail'
 import { useSelector } from 'react-redux'
+import Mentor from './pages/Mentor'
 
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
       <Route path='/signup' element={<SignUp/>} />
       </>}
       <Route path='/verifyEmail' element={<VerifyEmail/>}/>
+      <Route path='/apply-mentor' element={<Mentor/>}/>
+      <Route path='*' element={<Error/>}/>
     </Routes>
     </>
   )

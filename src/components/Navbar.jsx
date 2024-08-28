@@ -15,7 +15,11 @@ const Navbar = () => {
     <div className='h-[60px] w-full border-b-[1px] flex justify-between items-center px-10'>
       <div>logo</div>  
       {
-        token && user && <button onClick={logoutHandler} className='border-[1px] rounded-md p-2 font-bold'>Log Out</button>
+        token && user && <div className='flex gap-x-3'>
+          <button onClick={()=>navigate('/apply-mentor')} className='border-[1px] text-white rounded-md p-2 bg-emerald-700 font-bold'>Become A Mentor</button>
+          <button onClick={logoutHandler} className='border-[1px] rounded-md p-2 font-bold'>Log Out</button>
+          {/* profile dropdown to be added */}
+        </div>
       }
       {
         !token && !user && <div className='flex gap-x-3'>
