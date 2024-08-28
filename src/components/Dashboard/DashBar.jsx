@@ -11,21 +11,21 @@ const DashBar = () => {
      {
        user?.accountType === "Mentee" && (
         Mentee.map((item,index)=>{
-            return <DashBarLink item={item}/>
+            return <DashBarLink key={index} item={item}/>
         })
        )
      }
      {
        user?.accountType === "Mentor" && (
         Mentor.map((item,index)=>{
-            return <DashBarLink item={item}/>
+            return <DashBarLink key={index} item={item}/>
         })
        )
      }
      {
        user?.accountType === "Admin" && (
         Admin.map((item,index)=>{
-            return <DashBarLink item={item}/>
+            return <DashBarLink key={index} item={item}/>
         })
        )
      }

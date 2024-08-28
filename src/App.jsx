@@ -11,6 +11,7 @@ import PrivateRoute from './components/Dashboard/PrivateRoute'
 import Dashboard from './pages/Dashboard'
 import Profile from './components/Dashboard/Profile'
 import VideoCalls from './components/Dashboard/VideoCalls'
+import Room from './components/Dashboard/Room'
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
       <Route element={<PrivateRoute><Dashboard/></PrivateRoute>}>
        <Route path='/dashboard/my-profile' element={<Profile/>}/>
        <Route path='/dashboard/video-calls' element={<VideoCalls/>}/>
+       <Route path='/video-calls/:roomId' element={<Room/>}/>
       </Route>
       <Route path='*' element={<Error/>}/>
     </Routes>
