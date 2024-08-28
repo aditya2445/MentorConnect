@@ -5,3 +5,13 @@ export const auth = {
     SENDOTP_API:BASE_URL+"/auth/sendotp",
     LOGIN_API:BASE_URL+"/auth/login",
 }
+
+export const mentor = {
+    MENTOR_APP_API:BASE_URL+"/mentor/mentorApp",
+    CHECK_MENTOR_API:BASE_URL+"/mentor/checkMentor"
+}
+
+export const category = {
+    CREATE_CATEGORY_API:BASE_URL+"/category/createCategory",
+    SHOW_ALL_CATEGORY_API:BASE_URL+"/category/showAllCategory"
+}

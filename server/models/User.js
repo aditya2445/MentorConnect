@@ -36,7 +36,26 @@ token:{
 },
 resetPasswordExpires:{
     type:Date
-}
+},
+category:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"Category"
+},
+skills:{
+  type:String
+},
+mentees:[
+    {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    }
+],
+mentors:[
+    {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    }
+]
 },{timestamps:true})
 
 module.exports = mongoose.model("User",userSchema)

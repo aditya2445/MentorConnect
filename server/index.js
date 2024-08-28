@@ -6,6 +6,8 @@ const { dbConnect } = require("./config/database")
 const {cloudinaryConnect} = require("./config/cloudinary")
 const userRoutes = require('./routes/userRoutes')
 const profileRoutes = require('./routes/profileRoutes')
+const mentorRoutes = require('./routes/mentoRoutes')
+const categoryRoutes = require('./routes/categoryRoutes')
 const chatRoutes = require('./routes/chatRoutes')
 const messageRoutes = require('./routes/messageRoutes')
 const sessionRoutes = require('./routes/sessionRoutes')
@@ -16,10 +18,8 @@ const session = require("express-session");
 const passport = require("passport");
 const dotenv = require("dotenv");
 require('./controllers/google')
-
 app.use(express.json())
 app.use(cookieParser())
-
 app.use(session({
     secret: "cyberwolve",
     resave: false,
@@ -46,6 +46,8 @@ dbConnect();
 //routes
 app.use("/api/v1/auth",userRoutes)
 app.use("/api/v1/profile", profileRoutes);
+app.use("/api/v1/mentor",mentorRoutes)
+app.use("/api/v1/category",categoryRoutes)
 app.use("/api/v1/chat", chatRoutes);
 app.use("/api/v1/message", messageRoutes);
 app.use("/api/v1/session", sessionRoutes);

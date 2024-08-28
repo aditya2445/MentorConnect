@@ -15,6 +15,28 @@ contactNumber:{
     type:String,
     trim:true
 },
+company:{
+    type:String,
+},
+jobTitle:{
+    type:String,
+},
+address:{
+    type:String,
+},
+whyDoYouWantToBecomeMentor:{
+    type:String,
+    trim:true
+},
+achievements:{
+    type:String
+},
+linkedInUrl:{
+type:String
+},
+githubUrl:{
+type:String
+}
 },
 {timestamps:true});
 

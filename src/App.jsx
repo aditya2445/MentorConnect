@@ -7,6 +7,12 @@ import Navbar from './components/Navbar'
 import VerifyEmail from './pages/VerifyEmail'
 import Chat from "./pages/Chat"
 import { useSelector } from 'react-redux'
+import Mentor from './pages/Mentor'
+import PrivateRoute from './components/Dashboard/PrivateRoute'
+import Dashboard from './pages/Dashboard'
+import Profile from './components/Dashboard/Profile'
+import VideoCalls from './components/Dashboard/VideoCalls'
+import Room from './components/Dashboard/Room'
 
 
 function App() {
@@ -18,7 +24,7 @@ function App() {
 
   return (
     <>
-   {!hideNavbarRoutes.includes(location.pathname) && <Navbar />}
+   {!hideNavbarRoutes.includes(location.pathname) && <Navbar/>}
     <Routes>
       <Route path='/' element={<Home/>} />
 { !token && !user &&  <>
@@ -26,7 +32,18 @@ function App() {
       <Route path='/signup' element={<SignUp/>} />
       </>}
       <Route path='/verifyEmail' element={<VerifyEmail/>}/>
+<<<<<<< HEAD
       <Route path='/chats' element={<Chat/>}/>
+=======
+      <Route path='/apply-mentor' element={<Mentor/>}/>
+      <Route path='*' element={<Error/>}/>
+      <Route element={<PrivateRoute><Dashboard/></PrivateRoute>}>
+       <Route path='/dashboard/my-profile' element={<Profile/>}/>
+       <Route path='/dashboard/video-calls' element={<VideoCalls/>}/>
+       <Route path='/video-calls/:roomId' element={<Room/>}/>
+      </Route>
+      <Route path='*' element={<Error/>}/>
+>>>>>>> d86f17ddb991fb1c1ca12449fa13f858ccb2bfd6
     </Routes>
     </>
   )
