@@ -5,6 +5,7 @@ import LogIn from './pages/LogIn'
 import SignUp from './pages/SignUp'
 import Navbar from './components/Navbar'
 import VerifyEmail from './pages/VerifyEmail'
+import Chat from "./pages/Chat"
 import { useSelector } from 'react-redux'
 
 
@@ -25,6 +26,7 @@ function App() {
       <Route path='/signup' element={<SignUp/>} />
       </>}
       <Route path='/verifyEmail' element={<VerifyEmail/>}/>
+      <Route path='/chats' element={<Chat/>}/>
     </Routes>
     </>
   )
