@@ -1,6 +1,7 @@
 const Message = require("../models/messageModel");
 const User = require("../models/User");
 const Chat = require("../models/chatModel");
+const path = require("path");
 
 const allMessages = async(req,res)=>{
     try {
@@ -25,24 +26,29 @@ const sendMessage = async (req, res) => {
         console.log("Invalid data passed into request");
         return res.sendStatus(400);
     }
-    console.log(req.user._id);
-    const newMessage = {
-        sender: req.user._id,
-        content: content,
-        chat: chatId,
-    };
 
     try {
-        // Log the newMessage object to inspect chatId
-        console.log("New Message Object:", newMessage);
+        // Log the request user ID and incoming message data
+        console.log("User ID:", req.user._id);
+        console.log("Incoming Message Data:", { content, chatId });
 
         // Create a new message
+        const newMessage = {
+            sender: req.user._id,
+            content: content,
+            chat: chatId,
+        };
+
+        // Log the newMessage object for debugging
+        console.log("New Message Object:", newMessage);
+
+        // Create the message
         let message = await Message.create(newMessage);
 
-        // Check the created message before populating
+        // Log the created message
         console.log("Created Message:", message);
 
-        // Retrieve the full message document and populate the necessary fields
+        // Retrieve the full message document and populate necessary fields
         message = await Message.findById(message._id)
             .populate("sender", "firstName image")
             .populate({
@@ -57,7 +63,7 @@ const sendMessage = async (req, res) => {
         console.log("Message after population:", message);
 
         // Update the latest message in the chat
-        await Chat.findByIdAndUpdate(chatId, { latestMessage: message });
+        await Chat.findByIdAndUpdate(chatId, { latestMessage: message._id });
 
         return res.status(200).json({
             success: true,
@@ -65,11 +71,13 @@ const sendMessage = async (req, res) => {
             data: message
         });
     } catch (error) {
+        console.error("Error sending message:", error);
         return res.status(500).json({
             message: error.message,
         });
     }
 };
+
 
 
 module.exports = {allMessages,sendMessage}

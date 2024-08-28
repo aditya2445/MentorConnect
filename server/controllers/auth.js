@@ -143,13 +143,13 @@ try {
     const user=await User.findOne({email});
         
             if(!user){
-                res.status(401).json({
+                return res.status(401).json({
                     success:false,
                     message:"User does not exist"
                 })
             }
 
-            const isPasswordMatched=await bcrypt.compare(password,user.password);
+    const isPasswordMatched=await bcrypt.compare(password,user.password);
         
         if(isPasswordMatched){
             const payload={
@@ -170,7 +170,7 @@ try {
             expires:new Date(Date.now()+3*24*60*60*1000),
             httpOnly:true,
            }
-           res.cookie("token",token,options).status(200).json({
+           return res.cookie("token",token,options).status(200).json({
             success:true,
             message:"user logged in successfully",
             user
