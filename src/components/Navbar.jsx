@@ -12,7 +12,8 @@ const Navbar = () => {
   const {user} = useSelector(state=>state.profile)
   const {token} = useSelector(state=>state.auth)
   return (
-    <div className='h-[60px] w-full border-b-[1px] flex justify-between items-center px-10'>
+    <div className='flex flex-col'>
+    <div className='h-[60px] w-full  flex justify-between items-center px-10'>
       <div>logo</div>  
       {
         token && user && <div className='flex gap-x-3'>
@@ -27,6 +28,8 @@ const Navbar = () => {
           <button onClick={()=>navigate('/signup')} className='border-[1px] rounded-md p-2 font-bold'>Sign Up</button>
         </div>
       }
+    </div>
+    <div className='w-full h-[1px] bg-gradient-to-r from-white via-gray-400 to-white'></div>
     </div>
   )
 }

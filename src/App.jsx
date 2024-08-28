@@ -7,6 +7,10 @@ import Navbar from './components/Navbar'
 import VerifyEmail from './pages/VerifyEmail'
 import { useSelector } from 'react-redux'
 import Mentor from './pages/Mentor'
+import PrivateRoute from './components/Dashboard/PrivateRoute'
+import Dashboard from './pages/Dashboard'
+import Profile from './components/Dashboard/Profile'
+import VideoCalls from './components/Dashboard/VideoCalls'
 
 
 function App() {
@@ -18,7 +22,7 @@ function App() {
 
   return (
     <>
-   {!hideNavbarRoutes.includes(location.pathname) && <Navbar />}
+   {!hideNavbarRoutes.includes(location.pathname) && <Navbar/>}
     <Routes>
       <Route path='/' element={<Home/>} />
 { !token && !user &&  <>
@@ -27,6 +31,11 @@ function App() {
       </>}
       <Route path='/verifyEmail' element={<VerifyEmail/>}/>
       <Route path='/apply-mentor' element={<Mentor/>}/>
+      <Route path='*' element={<Error/>}/>
+      <Route element={<PrivateRoute><Dashboard/></PrivateRoute>}>
+       <Route path='/dashboard/my-profile' element={<Profile/>}/>
+       <Route path='/dashboard/video-calls' element={<VideoCalls/>}/>
+      </Route>
       <Route path='*' element={<Error/>}/>
     </Routes>
     </>
