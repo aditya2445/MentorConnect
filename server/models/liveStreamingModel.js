@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const liveStreamingSchema = new mongoose.Schema({
     mentor:{
-        type:mongoose.Types.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:"User",
         required:true,
     },
@@ -15,7 +15,7 @@ const liveStreamingSchema = new mongoose.Schema({
     },
     participants:[
         {
-            type:mongoose.Types.ObjectId,
+            type:mongoose.Schema.Types.ObjectId,
             ref:"User",
         }
     ],
@@ -28,4 +28,4 @@ const liveStreamingSchema = new mongoose.Schema({
 
 const LiveStreaming = mongoose.model("LiveStreaming",liveStreamingSchema);
 
-module.exports = {LiveStreaming};
+module.exports = LiveStreaming;

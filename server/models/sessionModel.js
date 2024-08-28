@@ -2,12 +2,12 @@ const mongoose = require("mongoose")
 
 const sessionSchema = new mongoose.Schema({
     mentor:{
-        type:mongoose.Types.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:"User",
         required:true,
     },
     mentee:{
-        type:mongoose.Types.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:"User",
         required:true,
     },
@@ -16,7 +16,7 @@ const sessionSchema = new mongoose.Schema({
         required:true,
     },
     date:{
-        type:date,
+        type:Date,
         required:true,
     },
     status:{
@@ -26,7 +26,6 @@ const sessionSchema = new mongoose.Schema({
     },
     feedback:{
         type:String,
-        required:true,
     }
 },{timestamps:true})
 

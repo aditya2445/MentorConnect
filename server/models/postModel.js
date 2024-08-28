@@ -11,7 +11,7 @@ const postSchema = new mongoose.Schema({
         required:true,
     },
     owner:{
-        type:mongoose.Types.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:'User',
         required:true,
     }
@@ -19,4 +19,4 @@ const postSchema = new mongoose.Schema({
 },{timestamps:true})
 
 const Post = mongoose.model("Post",postSchema);
-module.exports = {Post}; 
+module.exports = Post; 
