@@ -21,7 +21,8 @@ const allMessages = async(req,res)=>{
 
 const sendMessage = async (req, res) => {
     const { content, chatId } = req.body;
-
+    // console.log("PrintingContent",content);
+    
     if (!content || !chatId) {
         console.log("Invalid data passed into request");
         return res.sendStatus(400);
