@@ -32,9 +32,7 @@ function App() {
       <Route path='/signup' element={<SignUp/>} />
       </>}
       <Route path='/verifyEmail' element={<VerifyEmail/>}/>
-<<<<<<< HEAD
       <Route path='/chats' element={<Chat/>}/>
-=======
       <Route path='/apply-mentor' element={<Mentor/>}/>
       <Route path='*' element={<Error/>}/>
       <Route element={<PrivateRoute><Dashboard/></PrivateRoute>}>
@@ -43,7 +41,6 @@ function App() {
        <Route path='/video-calls/:roomId' element={<Room/>}/>
       </Route>
       <Route path='*' element={<Error/>}/>
->>>>>>> d86f17ddb991fb1c1ca12449fa13f858ccb2bfd6
     </Routes>
     </>
   )

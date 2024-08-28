@@ -20,12 +20,9 @@
     margin-top: 10px;
     margin-bottom: 10px;
  }
-
-<<<<<<< HEAD
  body{
   overflow-x: hidden;
  }
-=======
  @media(max-width: 768px){
   .status{
     display: flex;
@@ -51,4 +48,3 @@
     gap: 20px;
   }
  }
->>>>>>> d86f17ddb991fb1c1ca12449fa13f858ccb2bfd6
