@@ -13,6 +13,7 @@ const messageRoutes = require('./routes/messageRoutes')
 const sessionRoutes = require('./routes/sessionRoutes')
 const resumeRoutes = require('./routes/resumeRoutes')
 const ratingReview = require('./routes/ratingReview')
+const postRoutes = require('./routes/postRoutes')
 const fileUpload = require("express-fileupload")
 const session = require("express-session");
 const passport = require("passport");
@@ -53,6 +54,7 @@ app.use("/api/v1/message", messageRoutes);
 app.use("/api/v1/session", sessionRoutes);
 app.use("/api/v1/resume", resumeRoutes);
 app.use("/api/v1/rating", ratingReview);
+app.use("/api/v1/post", postRoutes);
 
 const server = app.listen(process.env.PORT,()=>{
     console.log("server is online")
