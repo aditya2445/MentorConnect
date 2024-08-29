@@ -41,7 +41,7 @@ function MyChats({fetchAgain}) {
             (<div>
                 {chats.map((chat)=>(
                         <div onClick={()=>dispatch(setSelectedChat(chat))}
-                        className={`${selectedChat === chat?"bg-green-600":"bg-red-400"} px-1 py-1 rounded-lg`}
+                        className={`${selectedChat === chat?"bg-green-600":"bg-red-400"} px-1 py-1 rounded-lg mb-1`}
                         key={chat._id}
                         >
                             {

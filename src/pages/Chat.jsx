@@ -9,18 +9,15 @@ function Chat() {
     const {token} = useSelector(state=>state.auth)
     const {user} = useSelector(state=>state.profile)
     console.log(user);
-    const handleSearch = (query) =>{
-        console.log("Searching for:",query);
-    }
     const [fetchAgain,setFetchAgain] = useState(false);
   return (
     <div>
-      <div className='flex justify-around w-[100vw] h-[100vh]'>
         {/* sidebar */}
+        <SearchBar/>
+      <div className='flex justify-around w-[100vw] h-[100vh]'>
             <div className='w-[30%] bg-slate-300'>
               <div className='w-full h-full rounded-lg border-8 border-gray-200'>
-                <SearchBar onSearch={handleSearch}/>
-                <br />
+                <p>MY CHATS</p>
                 {user && <MyChats fetchAgain={fetchAgain}/>}
               </div>
             </div>

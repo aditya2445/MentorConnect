@@ -144,6 +144,7 @@ function SingleChat({fetchAgain,setFetchAgain}) {
                     {
                         messages && (
                             <>
+                            {console.log(selectedChat)}
                                 {getSender(user, selectedChat.users)}
                                 <ProfileModal 
                                     user={getSenderFull(user, selectedChat.users)}
