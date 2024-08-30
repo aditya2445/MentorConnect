@@ -16,6 +16,8 @@ import Room from './components/Dashboard/Room'
 import ResumePage from './pages/ResumePage'
 import AfterPost from './pages/AfterPost'
 import ReviewAResume from"./pages/ReviewAResume";
+import PremDetails from './pages/PremDetails'
+import PremiumSectionDetails from './components/premium/PremiumSectionDetails'
 
 function App() {
   const {user} = useSelector(state=>state.profile)
@@ -46,6 +48,10 @@ function App() {
        <Route path='/dashboard/my-profile' element={<Profile/>}/>
        <Route path='/dashboard/video-calls' element={<VideoCalls/>}/>
        <Route path='/video-calls/:roomId' element={<Room/>}/>
+      </Route>
+      <Route>
+        <Route path='/premium' element={<PremDetails/>}/>
+        <Route path="/premium/:sectionId" element={<PremiumSectionDetails />} />
       </Route>
       <Route path='*' element={<Error/>}/>
     </Routes>

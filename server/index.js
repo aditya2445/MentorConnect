@@ -14,10 +14,13 @@ const sessionRoutes = require('./routes/sessionRoutes')
 const resumeRoutes = require('./routes/resumeRoutes')
 const ratingReview = require('./routes/ratingReview')
 const postRoutes = require('./routes/postRoutes')
+const premiumRoutes = require('./routes/premiumRoutes')
+const paymentRoutes = require('./routes/paymentRoutes')
 const fileUpload = require("express-fileupload")
 const session = require("express-session");
 const passport = require("passport");
 const dotenv = require("dotenv");
+// require("./cron-jobs/cleanEnrollments")
 require('./controllers/google')
 app.use(express.json())
 app.use(cookieParser())
@@ -55,6 +58,8 @@ app.use("/api/v1/session", sessionRoutes);
 app.use("/api/v1/resume", resumeRoutes);
 app.use("/api/v1/rating", ratingReview);
 app.use("/api/v1/post", postRoutes);
+app.use("/api/v1/premium", premiumRoutes);
+app.use("/api/v1/payment", paymentRoutes);
 
 const server = app.listen(process.env.PORT,()=>{
     console.log("server is online")

@@ -15,3 +15,14 @@ export const category = {
     CREATE_CATEGORY_API:BASE_URL+"/category/createCategory",
     SHOW_ALL_CATEGORY_API:BASE_URL+"/category/showAllCategory"
 }
+
+export const premium = {
+    FETCH_PREMIUMS_API:BASE_URL+"/premium/getAllPremium",
+    FETCH_PREMIUMS_DETAILS:BASE_URL+"/premium/getPremiumDetails/",
+    CHECK_PURCHASE_STATUS:BASE_URL+"/premium/check-purchase-status"
+}
+
+export const payment ={
+    CREATE_ORDER:BASE_URL+"/payment/createOrder",
+    VERIFY:BASE_URL+"/payment/verify"
+}
