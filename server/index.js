@@ -22,6 +22,13 @@ const passport = require("passport");
 const dotenv = require("dotenv");
 // require("./cron-jobs/cleanEnrollments")
 require('./controllers/google')
+const bodyParser = require("body-parser")
+app.use(bodyParser.json({ limit: '35mb' }));
+app.use(bodyParser.urlencoded({
+  extended: true,
+  limit: '35mb',
+  parameterLimit: 50000, 
+}));
 app.use(express.json())
 app.use(cookieParser())
 app.use(session({

@@ -1,16 +1,16 @@
 const express = require("express");
-const { sendOtp, signUp, logIn, allUsers } = require("../controllers/auth");
+const { sendOtp, signUp, logIn, getUserDetails,allUsers } = require("../controllers/auth");
 const {authMiddleware} = require("../middlewares/auth")
 const route = express.Router();
 const passport = require("passport");
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 require("dotenv").config()
 
 route.post("/sendotp",sendOtp)
 route.post("/signup",signUp)
 route.post("/login",logIn)
-route.get("/",authMiddleware
-  ,allUsers)
+route.get("/getUserDetails",authMiddleware,getUserDetails)
+route.get("/",authMiddleware,allUsers)
 
 route.get('/google/login',
     passport.authenticate('google', { scope: ['profile', 'email'],state:'login' })

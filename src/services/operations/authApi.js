@@ -4,7 +4,7 @@ import { setLoading,setToken } from '../../slice/authSlice'
 import { apiConnector } from '../apiConnector'
 import { setUser } from '../../slice/profileSlice'
 
-const {SIGNUP_API,LOGIN_API,SENDOTP_API} = auth
+const {SIGNUP_API,LOGIN_API,SENDOTP_API,GET_USER_DETAILS} = auth
 
 export function sendOtp(email,navigate){
  return async(dispatch)=>{
@@ -82,4 +82,20 @@ export function logOut(navigate){
    navigate("/")
    dispatch(setLoading(false))
   }
+}
+
+export async function getUserDetails(token){
+  let res;
+  try {
+    const response = await apiConnector("GET",GET_USER_DETAILS,null,{
+      Authorization : `Bearer ${token}`
+    })
+    if(!response?.data?.success){
+      throw new Error("user details unavailable")
+    }
+    res = response?.data?.data
+  } catch (error) {
+    console.log("unable to fetch details")
+  }
+  return res;
 }

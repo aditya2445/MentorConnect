@@ -36,6 +36,14 @@ type:String
 },
 githubUrl:{
 type:String
+},
+education:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"Education"
+},
+projects:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"Projects"
 }
 },
 {timestamps:true});
