@@ -1,6 +1,7 @@
 const ResumeReview = require("../models/resumeReviewModel");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const mailSender = require("../utils/mailSender");
 
 const createResumeReview = async(req,res)=>{
     try {
@@ -45,7 +46,7 @@ const createResumeReview = async(req,res)=>{
 
 const getAllResumeReviews = async(req,res)=>{
     try {
-        const allResumes = await ResumeReview.find({},{status:"NULL"}).populate("mentee","name email").exec();
+        const allResumes = await ResumeReview.find({status:"NULL"}).populate("mentee","firstName email lastName image");
         if(!allResumes){
             return res.status(400).json({
                 success:false,
@@ -69,7 +70,7 @@ const updateResumeReview = async (req, res) => {
     try {
         const { resumeId } = req.params; 
         const mentorId = req.user._id; 
-        const { status, feedback } = req.body;
+        const { status,feedback,email } = req.body;
         console.log(resumeId);
         const updatedReview = await ResumeReview.findByIdAndUpdate(
             resumeId,
@@ -87,7 +88,9 @@ const updateResumeReview = async (req, res) => {
                 message: "Resume review not found"
             });
         }
-
+        //send a mail with feedback if needed
+        const mailResponse=await mailSender(email,"Your Resume is being Reviewed",feedback);
+        console.log(mailResponse);
         res.status(200).json({
             success: true,
             message: "Resume review updated successfully",

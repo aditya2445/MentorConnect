@@ -13,7 +13,9 @@ import Dashboard from './pages/Dashboard'
 import Profile from './components/Dashboard/Profile'
 import VideoCalls from './components/Dashboard/VideoCalls'
 import Room from './components/Dashboard/Room'
-
+import ResumePage from './pages/ResumePage'
+import AfterPost from './pages/AfterPost'
+import ReviewAResume from"./pages/ReviewAResume";
 
 function App() {
   const {user} = useSelector(state=>state.profile)
@@ -33,6 +35,11 @@ function App() {
       </>}
       <Route path='/verifyEmail' element={<VerifyEmail/>}/>
       <Route path='/chats' element={<Chat/>}/>
+      <Route path='/resume-post' element={<ResumePage/>}/>
+      <Route path='/resume-post/submitted' element={<AfterPost/>}/>
+      {/* only for mentor */}
+      <Route path='/resume/review' element={<ReviewAResume/>}/>
+      
       <Route path='/apply-mentor' element={<Mentor/>}/>
       <Route path='*' element={<Error/>}/>
       <Route element={<PrivateRoute><Dashboard/></PrivateRoute>}>
