@@ -5,6 +5,7 @@ import LogIn from './pages/LogIn'
 import SignUp from './pages/SignUp'
 import Navbar from './components/Navbar'
 import VerifyEmail from './pages/VerifyEmail'
+import Chat from "./pages/Chat"
 import { useSelector } from 'react-redux'
 import Mentor from './pages/Mentor'
 import PrivateRoute from './components/Dashboard/PrivateRoute'
@@ -12,7 +13,9 @@ import Dashboard from './pages/Dashboard'
 import Profile from './components/Dashboard/profile/Profile'
 import VideoCalls from './components/Dashboard/video-calls/VideoCalls'
 import Room from './components/Dashboard/video-calls/Room'
-
+import ResumePage from './pages/ResumePage'
+import AfterPost from './pages/AfterPost'
+import ReviewAResume from"./pages/ReviewAResume";
 
 function App() {
   const {user} = useSelector(state=>state.profile)
@@ -31,6 +34,12 @@ function App() {
       <Route path='/signup' element={<SignUp/>} />
       </>}
       <Route path='/verifyEmail' element={<VerifyEmail/>}/>
+      <Route path='/chats' element={<Chat/>}/>
+      <Route path='/resume-post' element={<ResumePage/>}/>
+      <Route path='/resume-post/submitted' element={<AfterPost/>}/>
+      {/* only for mentor */}
+      <Route path='/resume/review' element={<ReviewAResume/>}/>
+      
       <Route path='/apply-mentor' element={<Mentor/>}/>
       <Route path='*' element={<Error/>}/>
       <Route element={<PrivateRoute><Dashboard/></PrivateRoute>}>
