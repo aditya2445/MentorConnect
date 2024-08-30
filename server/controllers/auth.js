@@ -190,3 +190,32 @@ try {
 
 }
 
+exports.getUserDetails = async(req,res)=>{
+    try {
+        const userId = req.user._id;
+       
+        const user = await User.findById(userId)
+        .populate({
+            path:"additionalDetails",
+            populate:{
+                path:"education"
+            },
+            populate:{
+                path:"projects"
+            }
+        })
+        .populate("category")
+        return res.status(200).json({
+           success:true,
+           message:"User Details Fetched",
+           data:user 
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success:false,
+            message:"Unable to fetch user details",
+         })
+    }
+
+}
+

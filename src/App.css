@@ -21,7 +21,7 @@
     margin-bottom: 10px;
  }
 
- @media(max-width: 768px){
+ @media(max-width:1024px){
   .status{
     display: flex;
     flex-direction: column;
@@ -37,12 +37,33 @@
   .status-name{
     align-items: center;
   }
- }
-
- @media(max-width:768px){
-  .status-main{
+  .status_main{
     display: flex;
     flex-direction: column;
-    gap: 20px;
-  }
+   }
  }
+ 
+
+
+@media(max-width:1024px){
+  .profile_div{
+    display: flex;
+    flex-direction: column;
+  }
+  
+}
+
+.container{
+  scale: 0;
+}
+.active{
+  scale:1;
+ transition:all;
+ transition-duration: 0.6s; 
+}
+.overlay {
+  background-color: #5f5f5f83; 
+}
+
+
+
