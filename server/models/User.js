@@ -56,6 +56,18 @@ mentors:[
         ref:"User"
     }
 ],
+events:[
+    {
+       type:mongoose.Schema.Types.ObjectId,
+        ref:"Session"
+    }
+],
+timeSlots:[
+    {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"TimeSlots" 
+    }
+]
 },{timestamps:true})
 
 module.exports = mongoose.model("User",userSchema)

@@ -4,7 +4,7 @@ import { setLoading,setToken } from '../../slice/authSlice'
 import { apiConnector } from '../apiConnector'
 import { setUser } from '../../slice/profileSlice'
 
-const {SIGNUP_API,LOGIN_API,SENDOTP_API,GET_USER_DETAILS} = auth
+const {SIGNUP_API,LOGIN_API,SENDOTP_API,GET_USER_DETAILS,CONTACT_US_API} = auth
 
 export function sendOtp(email,navigate){
  return async(dispatch)=>{
@@ -56,7 +56,7 @@ export function login(email,password,navigate){
             toast.success("Login Successfull")
           
             dispatch(setToken(response?.data?.user?.token))
-            const userImage = `https://api.dicebear.com/5.x/initials/svg?seed=${response?.data?.user?.firstName} ${response?.data?.user?.lastName}`
+            const userImage = `https://api.dicebear.com/5.x/initials/svg?seed=${response?.data?.user?.firstName} ${response?.data?.user?.lastName }`
             dispatch(setUser({ ...response?.data?.user, image: userImage }))
           
             localStorage.setItem("token", JSON.stringify(response?.data?.user?.token))
@@ -99,3 +99,19 @@ export async function getUserDetails(token){
   }
   return res;
 }
+
+export async function contactUs(data){
+  const toastId = toast.loading("submitting...")
+  try {
+    const res = await apiConnector("POST",CONTACT_US_API,data);
+    if(!res?.data?.success){
+      throw new Error("submission failed")
+    }
+    toast.success("form Submitted")
+  } catch (error) {
+    console.log("unable to submit the form")
+    toast.error("unable to submit the form")
+  }
+  toast.dismiss(toastId)
+}
+

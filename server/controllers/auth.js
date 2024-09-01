@@ -195,16 +195,16 @@ exports.getUserDetails = async(req,res)=>{
         const userId = req.user._id;
        
         const user = await User.findById(userId)
-        .populate({
-            path:"additionalDetails",
-            populate:{
-                path:"education"
-            },
-            populate:{
-                path:"projects"
-            }
-        })
-        .populate("category")
+        // .populate({
+        //     path:"additionalDetails",
+        //     populate:{
+        //         path:"education"
+        //     },
+        //     populate:{
+        //         path:"projects"
+        //     }
+        // })
+        .populate("category").exec()
         return res.status(200).json({
            success:true,
            message:"User Details Fetched",

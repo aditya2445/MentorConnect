@@ -4,6 +4,7 @@ const {authMiddleware} = require("../middlewares/auth")
 const route = express.Router();
 const passport = require("passport");
 const jwt = require('jsonwebtoken');
+const { ContactUs } = require("../controllers/ContactUs");
 require("dotenv").config()
 
 route.post("/sendotp",sendOtp)
@@ -43,6 +44,8 @@ route.get('/google/callback',
     }
     }
   );
+
+  route.post("/contact-us",ContactUs)
   
 
 

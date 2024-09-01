@@ -16,6 +16,10 @@ import Room from './components/Dashboard/video-calls/Room'
 import ResumePage from './pages/ResumePage'
 import AfterPost from './pages/AfterPost'
 import ReviewAResume from"./pages/ReviewAResume";
+import AboutUs from './pages/AboutUs'
+import ContactUs from './pages/ContactUs'
+import Sessions from './components/Dashboard/Events/Sessions'
+import TimeSlots from './components/Dashboard/Events/TimeSlots'
 
 function App() {
   const {user} = useSelector(state=>state.profile)
@@ -33,7 +37,9 @@ function App() {
       <Route path='/login' element={<LogIn/>} />
       <Route path='/signup' element={<SignUp/>} />
       </>}
+      <Route path='contact-us' element={<ContactUs/>} />
       <Route path='/verifyEmail' element={<VerifyEmail/>}/>
+      <Route path='/about-us' element={<AboutUs/>}/>
       <Route path='/chats' element={<Chat/>}/>
       <Route path='/resume-post' element={<ResumePage/>}/>
       <Route path='/resume-post/submitted' element={<AfterPost/>}/>
@@ -46,6 +52,8 @@ function App() {
        <Route path='/dashboard/my-profile' element={<Profile/>}/>
        <Route path='/dashboard/video-calls' element={<VideoCalls/>}/>
        <Route path='/video-calls/:roomId' element={<Room/>}/>
+       <Route path='/dashboard/sessions' element={<Sessions/>}/>
+       { user?.accountType === "Mentor" && <Route path='/dashboard/time-slots' element={<TimeSlots/>}/>}
       </Route>
       <Route path='*' element={<Error/>}/>
     </Routes>

@@ -7,7 +7,7 @@ const DashBar = () => {
     const {user} = useSelector(state=>state.profile)
     
   return (
-    <div className='flex items-center justify-between w-8/12 h-[40px] border-b-[1px] font-semibold '>
+    <div className='flex items-center justify-between w-8/12 h-[40px] border-b-[1px]  font-semibold '>
      {
        user?.accountType === "Mentee" && (
         Mentee.map((item,index)=>{

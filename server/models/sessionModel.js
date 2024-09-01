@@ -11,22 +11,28 @@ const sessionSchema = new mongoose.Schema({
         ref:"User",
         required:true,
     },
-    topic:{
+    title:{
         type:String,
         required:true,
     },
-    date:{
+    startDate:{
         type:Date,
         required:true,
     },
+    endDate:{
+        type:Date,
+        required:true,
+    },
+    description:{
+        type:String,
+        required:true
+    },
     status:{
         type:String,
-        enum:["Scheduled","Completed","Canccelled"],
+        enum:["Scheduled","Completed","Cancelled"],
         default:'Scheduled',
     },
-    feedback:{
-        type:String,
-    }
+
 },{timestamps:true})
 
 const Session = mongoose.model("Session",sessionSchema);

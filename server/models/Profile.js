@@ -41,10 +41,10 @@ education:{
     type:mongoose.Schema.Types.ObjectId,
     ref:"Education"
 },
-projects:{
+projects:[{
     type:mongoose.Schema.Types.ObjectId,
     ref:"Projects"
-}
+}]
 },
 {timestamps:true});
 

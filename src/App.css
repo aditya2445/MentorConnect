@@ -66,8 +66,32 @@
  transition-duration: 0.6s; 
 }
 .overlay {
-  background-color: #5f5f5f83; 
+  background-color: #5f5f5f83;
+
 }
+
+.fixed{
+  position: fixed;
+}
+
+.home{
+  background-image: url("./assets/Hero.png");
+  background-size: 100% auto; 
+  background-repeat: no-repeat;
+
+}
+
+
+
+
+
+
+
+
+ 
+
+
+
 
 
 

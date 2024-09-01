@@ -5,9 +5,7 @@ const bookSession = async(req,res)=>{
     try {
         const {mentorId,topic,date} = req.body;
         const mentor = await User.findById(mentorId,{accountType:"Mentor"});
-        // console.log(mentor);
         const menteeId = req.user._id;
-        // console.log(req.user._id);
         if(!mentor || !menteeId){
             return res.status(400).json({
                 success:false,
