@@ -20,6 +20,8 @@ import AboutUs from './pages/AboutUs'
 import ContactUs from './pages/ContactUs'
 import Sessions from './components/Dashboard/Events/Sessions'
 import TimeSlots from './components/Dashboard/Events/TimeSlots'
+import PremDetails from './pages/PremDetails'
+import PremiumSectionDetails from './components/premium/PremiumSectionDetails'
 
 function App() {
   const {user} = useSelector(state=>state.profile)
@@ -54,6 +56,10 @@ function App() {
        <Route path='/video-calls/:roomId' element={<Room/>}/>
        <Route path='/dashboard/sessions' element={<Sessions/>}/>
        { user?.accountType === "Mentor" && <Route path='/dashboard/time-slots' element={<TimeSlots/>}/>}
+      </Route>
+      <Route>
+        <Route path='/premium' element={<PremDetails/>}/>
+        <Route path="/premium/:sectionId" element={<PremiumSectionDetails />} />
       </Route>
       <Route path='*' element={<Error/>}/>
     </Routes>
