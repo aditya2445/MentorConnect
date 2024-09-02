@@ -11,21 +11,24 @@ function Chat() {
     console.log(user);
     const [fetchAgain,setFetchAgain] = useState(false);
   return (
-    <div>
-        {/* sidebar */}
-        <SearchBar/>
-      <div className='flex justify-around w-[100vw] h-[100vh]'>
-            <div className='w-[30%] bg-slate-300'>
-              <div className='w-full h-full rounded-lg border-8 border-gray-200'>
-                <p>MY CHATS</p>
-                {user && <MyChats fetchAgain={fetchAgain}/>}
-              </div>
-            </div>
-        {/* chat section */}
-            <div className='w-[70%]'>
-              {user && (<ChatBox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/>)}
-            </div>
-      </div>
+    <div className="h-screen flex flex-col">
+    {/* Sidebar */}
+    <div className="bg-blue-600 p-4 text-white">
+        <SearchBar />
+    </div>
+
+    <div className="flex-grow flex">
+        {/* My Chats Section */}
+        <div className="w-1/3 bg-gray-100 p-4 border-r border-gray-300 overflow-y-auto">
+            <h2 className="text-lg font-bold mb-4">My Chats</h2>
+            {user && <MyChats fetchAgain={fetchAgain} />}
+        </div>
+
+        {/* Chat Section */}
+        <div className="w-2/3 p-4">
+            {user && <ChatBox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />}
+        </div>
+    </div>
     </div>
   )
 }
