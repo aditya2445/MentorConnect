@@ -51,6 +51,7 @@ function SearchBar({onSearch}) {
       if (!chats.find((c) => c._id === data.data._id)) dispatch(setChats([data.data, ...chats]));
       dispatch(setSelectedChat(data.users));
       setLoadingChat(false);
+      setSearchResult([]);
       setOnClose(true);
     } catch (error) {
       console.log(error.message);
