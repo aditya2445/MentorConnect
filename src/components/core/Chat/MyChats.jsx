@@ -10,8 +10,8 @@ function MyChats({fetchAgain}) {
     const {token} = useSelector(state=>state.auth);
     const dispatch = useDispatch();
     const getSender = (loggedUser, users) => {
-        console.log(users);
-        return users[0]?._id === loggedUser?._id ? users[1].firstName : users[0].firstName;
+        console.log("chatlogics",users);
+        return users[0]?._id === loggedUser?._id ? users[1]?.firstName : users[0]?.firstName;
     };
     const fetchChats = async()=>{
         try {

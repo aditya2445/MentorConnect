@@ -109,22 +109,26 @@ const PremiumSectionDetails = () => {
   }
 
   return (
-    <div className='flex flex-col items-center border border-black max-w-fit font-serif bg-teal-400 p-2 mt-2 m-auto rounded-lg gap-2'>
-      <h1>Topic:{sectionDetails.name}</h1>
-      <p>Description: {sectionDetails.description}</p>
-      <p>Price: ${sectionDetails.price}</p>
-      <h3>Features:</h3>
-      <ul>
+    <div className="max-w-lg mx-auto p-6 bg-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mt-6">
+    <h1 className="text-2xl font-bold text-center mb-4">Topic: {sectionDetails.name}</h1>
+    <p className="text-gray-700 text-center mb-4">Description: {sectionDetails.description}</p>
+    <p className="text-gray-700 text-center mb-4">Price: ${sectionDetails.price}</p>
+    <h3 className="text-lg font-semibold text-center mb-2">Features:</h3>
+    <ul className="list-disc list-inside text-gray-700 mb-4">
         {sectionDetails.features.map((feature, index) => (
-          <li key={index}>{feature}</li>
+            <li key={index}>{feature}</li>
         ))}
-      </ul>
-      <button
-      className='m-2 bg-gray-600 p-3 text-white rounded-lg hover:shadow-lg'
-      onClick={hasPurchased ? () => navigate('/explore') : handleBuyCourse}>
-        {hasPurchased ? 'Click to Explore' : 'Proceed to Payment'}
-      </button>
+    </ul>
+    <div className="flex justify-center">
+        <button
+            className="bg-teal-500 text-white px-6 py-3 rounded-full hover:bg-teal-600 transition-colors duration-300"
+            onClick={hasPurchased ? () => navigate('/explore') : handleBuyCourse}
+        >
+            {hasPurchased ? 'Click to Explore' : 'Proceed to Payment'}
+        </button>
     </div>
+</div>
+
   );
 };
 

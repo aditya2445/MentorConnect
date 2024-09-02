@@ -20,39 +20,46 @@ const PremiumSectionList = () => {
     };
 
     return (
-        <div>
-            <h1 className='text-center font-bold'>Premium Sections</h1>
-                {premiumSections.map(section => (
-                    <div className='max-w-fit
-                    m-auto'>
-                        <div
-                        key={section._id}
-                        className=' bg-teal-500 font-serif border border-black flex justify-stretch rounded-lg m-2 hover:shadow-xl'
-                        >
-                            <div className='rounded-lg bg-gray-300 flex flex-col items-center m-2 p-2'>
-                                <img 
-                                className='w-[200px] h-[200px] rounded-full'
-                                src={section.owner.img || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwdCtAvSsrg2I9JQ2xVgmA0kZ4MY_kcFpGSA&s"} alt="" />
-                                {section.owner.firstName + section.owner.lastName}
-                            </div>
-                            <div className='flex flex-col m-2 p-2 gap-3 items-center justify-center'>
-                                <h2>{section.name}</h2>
-                                <p>Price: ${section.price}</p>
-                                <span className='font-extrabold'>Facilities</span>
-                                <ul className='text-center font-bold font-serif'>
-                                    <li>1.Text Facility</li>
-                                    <li>2.One-One Video Call</li>
-                                    <li>3.Session Bookings</li>
-                                    <li>4.30 Days Only</li>
-                                </ul>
-                                <button 
-                                className='bg-green-400 p-2 rounded-lg cursor-default hover:shadow-lg'
-                                onClick={() => handleViewDetails(section._id)}>View Details</button>
-                            </div>
+        <div className="p-6 bg-gray-100 min-h-screen">
+        <h1 className="text-center text-3xl font-bold mb-8">Premium Sections</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {premiumSections.map((section) => (
+                <div
+                    key={section._id}
+                    className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+                >
+                    <div className="p-6">
+                        <div className="flex justify-center">
+                            <img
+                                className="w-24 h-24 rounded-full mb-4"
+                                src={section.owner.img || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwdCtAvSsrg2I9JQ2xVgmA0kZ4MY_kcFpGSA&s"}
+                                alt={`${section.owner.firstName} ${section.owner.lastName}`}
+                            />
+                        </div>
+                        <h2 className="text-xl font-semibold text-center mb-2">
+                            {section.owner.firstName} {section.owner.lastName}
+                        </h2>
+                        <p className="text-center text-gray-600 mb-4">Price: ${section.price}</p>
+                        <span className="block text-center font-extrabold mb-2">Facilities</span>
+                        <ul className="text-center font-medium text-gray-700 mb-4">
+                            <li>1. Text Facility</li>
+                            <li>2. One-On-One Video Call</li>
+                            <li>3. Session Bookings</li>
+                            <li>4. 30 Days Only</li>
+                        </ul>
+                        <div className="flex justify-center">
+                            <button
+                                className="bg-teal-500 text-white px-4 py-2 rounded-full hover:bg-teal-600 transition-colors duration-300"
+                                onClick={() => handleViewDetails(section._id)}
+                            >
+                                View Details
+                            </button>
                         </div>
                     </div>
-                ))}
+                </div>
+            ))}
         </div>
+    </div>
     );
 };
 
