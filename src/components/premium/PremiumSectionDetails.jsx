@@ -61,7 +61,9 @@ const PremiumSectionDetails = () => {
                 Authorization: `Bearer ${token}`,
             },
         };
+        console.log("1")
         const { data } = await axios.post(`${payment.CREATE_ORDER}`, { premId: sectionId }, config);
+        console.log("2")
         
         // Log the response to inspect its structure
         console.log('Payment initiation response:', data);
@@ -70,7 +72,7 @@ const PremiumSectionDetails = () => {
         if (!data || !data.data) {
             throw new Error('Invalid response structure');
         }
-
+ 
         const options = {
             key: "rzp_test_KSyPcz7ikJ7jzS", // Your Razorpay Key ID
             amount: data.data.amount,

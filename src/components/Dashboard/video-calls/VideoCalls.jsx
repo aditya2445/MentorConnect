@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const VideoCalls = () => {
@@ -6,10 +6,12 @@ const VideoCalls = () => {
     const [roomId, setroomId] = useState("")
 
     const navigate = useNavigate()
-    const handleJoin = ()=>{
+    const handleJoin = useCallback(()=>{
+      navigate(`/video-calls/${roomId}`)
+    },[navigate,roomId])
 
-        navigate(`/video-calls/${roomId}`)
-    }
+        
+    
   return (
     <div className='flex items-center justify-center w-full h-[600px] '>
        <div className='flex flex-col gap-y-3'>

@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import {session} from '../apis'
 
-const {CREATE_TIME_SLOTS,GET_TIME_SLOTS} = session
+const {CREATE_TIME_SLOTS,GET_TIME_SLOTS,BOOK_SESSION,ALL_SESSION} = session
 
 
 export async function createTimeSlots(data,token) {
@@ -31,5 +31,36 @@ export async function getTimeSlots(userId) {
     } catch (error) {
         console.log("Unable to fetch data")
     }
+    return res;
+}
+
+export async function bookSession(data,token) {
+    try {
+        const response = await  apiConnector("POST",BOOK_SESSION,data,{
+            Authorization:`Bearer ${token}`
+        })
+     
+        if(!response?.data?.success){
+            throw new Error("someting went wrong while booking a session")
+        }
+    } catch (error) {
+        console.log("Unable to book a session")
+    }
+}
+
+export async function getAllSessions(token) {
+    let res;
+    try {
+        const response = await  apiConnector("GET",ALL_SESSION,null,{
+            Authorization:`Bearer ${token}`
+        })
+     
+        if(!response?.data?.success){
+            throw new Error("someting went wrong while fetching the sessions")
+        }
+        res= response?.data?.data
+    } catch (error) {
+        console.log("Unable to fetch the sessions")
+    } 
     return res;
 }

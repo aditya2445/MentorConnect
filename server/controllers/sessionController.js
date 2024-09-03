@@ -1,9 +1,10 @@
 const Session = require("../models/sessionModel");
+const TimeSlots = require("../models/TimeSlots");
 const User = require("../models/User");
 const mongoose = require("mongoose");
 const bookSession = async(req,res)=>{
     try {
-        const {mentorId,topic,date} = req.body;
+        const {mentorId,title,description,startDate,endDate,status="Pending"} = req.body;
         const mentor = await User.findById(mentorId,{accountType:"Mentor"});
         const menteeId = req.user._id;
         if(!mentor || !menteeId){
@@ -12,18 +13,48 @@ const bookSession = async(req,res)=>{
                 message:"mentor or menteeId is invalid"
             })
         }
-
-        const newSession = await Session.create({
-            mentor:mentorId,
-            mentee:new mongoose.Types.ObjectId(String(menteeId)),
-            topic,
-            date:new Date(date),
-            feedback:" "
-        });
+        const isSession = await Session.findOne({$and:[{mentee:menteeId},{startDate:new Date(startDate)},{endDate:new Date(endDate)},{status:"Scheduled"}]})
+        if(isSession){
+            return res.status(400).json({
+                success:false,
+                message:"Slot is Already booked"
+            })
+        }
+        
+        const isSlotAvailable = await TimeSlots.findOne({$and:[{mentor:mentorId},{start:new Date(startDate)},{end:new Date(endDate)}]})
+        
+        if(isSlotAvailable){
+            await TimeSlots.deleteOne({_id:isSlotAvailable._id})
+            await User.findByIdAndUpdate(mentorId,{$pull:{timeSlots:isSlotAvailable._id}},{new:true})
+            const session = await Session.create({
+                title:title,
+                description:description,
+                mentor:mentorId,
+                mentee:menteeId,
+                startDate:new Date(startDate),
+                endDate:new Date(endDate),
+                status:"Scheduled"
+            })
+            await User.findByIdAndUpdate(mentorId,{$push:{events:session._id}},{new:true})
+            await User.findByIdAndUpdate(menteeId,{$push:{events:session._id}},{new:true})
+            return res.status(201).json({
+                success:true,
+                message: "Session booked successfully",  
+            });
+        }
+        const session = await Session.create({
+            title:title,
+            description:description,
+            mentorId:mentorId,
+            menteeId:menteeId,
+            startDate:new Date(startDate),
+            endDate:new Date(endDate),
+            status:"Pending"
+        })
+        
         res.status(201).json({
             success:true,
-            message: "Session booked successfully", 
-            data: newSession 
+            message: "Session requst sent", 
         });
     } catch (error) {
         res.status(500).json({
@@ -36,18 +67,9 @@ const bookSession = async(req,res)=>{
 
 const getAllSessions = async(req,res)=>{
     try {
-        const sessions = await Session.find({},{mentor:req.user._id}).populate(
-            {
-                path:"mentee",
-                select:"firstName email"
-            }
-        );
-        if(!sessions || sessions.length === 0){
-            return res.status(400).json({
-                success:false,
-                message:"sessions cant be fetched",
-            })
-        }
+        const userId = req.user._id;
+        const sessions = await User.findById(userId).populate("events");
+        
         return res.status(200).json({
             success:true,
             message:"all sessions fetched",
@@ -156,4 +178,6 @@ const deleteSession = async(req,res)=>{
     }
 }
 
+
 module.exports = {bookSession,getSessionById,updateSessionStatus,addFeedback,deleteSession,getAllSessions}
+

@@ -22,7 +22,7 @@ const MentorProfile = () => {
     }
     fetchUserDetails()
     },[])
-    if(profileDetails)console.log(profileDetails)
+   
   return (
     <div className='w-full flex items-center justify-center relative'>
         <img className={`absolute top-[-70px] rounded-md w-[920px]  h-[169px]  z-10`} src={wallpaper} alt=''/>
@@ -30,7 +30,7 @@ const MentorProfile = () => {
             loading ?(<div className='h-[600px] flex items-center justify-center'><div className='spinner  '></div></div>) :
             (<div className='profile_div flex z-20  items-center gap-x-5 justify-between '>
                 <div className='flex bg-white flex-col border-[1px] items-center rounded-[9px] lg:w-[350px] sm:w-[392px] lg:h-[560px] p-5 px-7 gap-y-5 '>
-                    <div className='w-full h-[17%]'><img className='w-[89px] h-[89px] rounded-full object-cover' src={profileDetails?.image} alt=''/></div>
+                    <div className='w-full h-[17%]'><img className='w-[89px] h-[89px] rounded-full object-cover' src={profileDetails?.image ? profileDetails?.image : user?.image } alt=''/></div>
                     <fieldset className='flex flex-col gap-y-3 border-[1px] p-3 rounded-md w-full'>
                         <legend className='px-2 font-bold'> <i>Personal information</i> </legend>
                         <div className='flex flex-col'>

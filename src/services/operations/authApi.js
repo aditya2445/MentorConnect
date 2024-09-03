@@ -51,7 +51,7 @@ export function login(email,password,navigate){
         try {
             const response = await apiConnector("POST",LOGIN_API,{email,password});
             if(!response?.data?.success){
-              throw new Error(response?.data?.message);
+              throw new Error("Error occured during login");
             }
             toast.success("Login Successfull")
           

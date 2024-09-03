@@ -1,4 +1,5 @@
 
+const Session = require("../models/sessionModel");
 const TimeSlots = require("../models/TimeSlots");
 const User = require("../models/User");
 
@@ -8,10 +9,26 @@ exports.createTimeSlot = async(req,res)=>{
     console.log(req.body)
      const {date1,date2} = req.body;
      const userId = req.user._id;
-   
+
+     const isTimeSlotExist = await TimeSlots.findOne({$and:[{mentor:userId},{start:new Date(date1)},{end:new Date(date2)}]})
+     if(isTimeSlotExist){
+      return res.status(400).json({
+        success:false,
+        message:"Time Slot Already exist"
+      })
+     }
+     const isEventExist = await Session.findOne({$and:[{mentor:userId},{startDate:date1},{endDate:date2},{status:"Scheduled"}]})
+     if(isEventExist){
+      return res.status(400).json({
+        success:false,
+        message:"Event Already exist"
+      })
+     }
+
      const TimeSlot = await TimeSlots.create({
     start:new Date(date1),
-    end:new Date(date2)
+    end:new Date(date2),
+    mentor:userId
      })
    
 

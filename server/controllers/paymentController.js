@@ -35,13 +35,13 @@ exports.capturePayment = async(req,res)=>{
     } catch (error) {
         return res.status(500).json({ success: false, message: error.message })
     }
-
+ 
     const options = {
         amount: totalAmt * 100,
         currency: "INR",
         receipt: Math.random(Date.now()).toString(),
     }
-    try {
+    try {    
         const paymentResponse = await instance.orders.create(options);
         return res.status(200).json({
             success:true,
@@ -95,18 +95,19 @@ const enrollStudents = async (premium, userId, res) => {
     
     try {
         // Find the premium section
+   
         const prem = await Premium.findById(premium);
         if (!prem) {
             return res.status(404).json({ success: false, message: "Course not found" });
         }
         const owner = prem.owner;
-
+       
         // Check if the user is already enrolled
         const user = await User.findById(userId);
         if (user.mentors.includes(owner)) {
             return res.status(400).json({ success: false, message: "Student is already Enrolled" });
         }
-
+     
         // Proceed with enrollment
         await User.findOneAndUpdate(
             { _id: owner },
