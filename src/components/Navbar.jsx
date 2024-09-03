@@ -20,10 +20,10 @@ const Navbar = () => {
     <div className='h-[60px]  flex justify-between items-center px-10 w-full'>
       <div onClick={()=>navigate("/")} className='flex text-black items-center gap-x-2 font-bold text-lg'><FaSeedling/> MentConnect</div> 
       <div className='flex gap-x-10 items-center justify-center font-semibold '>
-        <div onClick={()=>navigate("/")}>Home</div>
-        <div>Mentors</div>
-        <div onClick={()=>navigate("/about-us")}>About Us</div>
-        <div onClick={()=>navigate("/contact-us")}>Contact Us</div>
+        <div className='cursor-default' onClick={()=>navigate("/")}>Home</div>
+        <div className='cursor-default' onClick={()=>navigate("/mentors")}>Mentors</div>
+        <div className='cursor-default' onClick={()=>navigate("/about-us")}>About Us</div>
+        <div className='cursor-default' onClick={()=>navigate("/contact-us")}>Contact Us</div>
         </div> 
       {
         token && user && <div className='flex gap-x-3'>{

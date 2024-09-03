@@ -20,6 +20,7 @@ function ReviewAResume() {
             }
             const { data } = await axios.get("http://localhost:3000/api/v1/resume/all", config);
             setResumes(data.data);
+            console.log(resumes)
         } catch (error) {
             console.error(error.message);
         }
@@ -55,56 +56,59 @@ function ReviewAResume() {
     return (
         <div>
             <div className='text-center mt-2 font-serif font-bold'>
-                Welcome {user.firstName}
+                Welcome {user?.firstName}
             </div>
             {
-                resumes ? (
-                    <div>
-                        {
-                            resumes.map((r, i) => (
-                                <div className='border max-w-fit mt-2 mb-2 border-black flex rounded-xl m-auto shadow-lg bg-teal-500'
-                                    key={i}>
-                                    <div className='flex flex-col items-center gap-1 m-2 bg-gray-300 rounded-lg p-2 font-serif'>
-                                        <div>
-                                            <img
-                                                className='rounded-full'
-                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH-blsvoWQeqmoTzZB3tISQMu2dw8R6TY4IA&s"
-                                                alt="" />
-                                        </div>
-                                        <div>
-                                            {r.mentee.firstName + " " + r.mentee.lastName}
-                                        </div>
-                                    </div>
-                                    <div className=' flex  flex-col bg-gray-200 m-2 rounded-lg justify-center gap-5 p-2 font-serif'>
-                                        <div>
-                                            My Email: {r.mentee.email}
-                                        </div>
-                                        <div className='text-sm'>
-                                            My Url:
-                                            <a href={r.resumeUrl} className='flex'>
-                                                Click Here: Link For The Image of resume.
-                                            </a>
-                                            <br />
-                                            <p>
-                                                Provide Status And necessary Feedback.
-                                            </p>
-                                        </div>
-                                        <div className='mb-2'>
-                                            <button className='bg-green-500 rounded-lg p-2'
-                                                onClick={() => handleModal(r)}
-                                            >
-                                                Give Status
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))
-                        }
+    resumes ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+            {
+                resumes.map((r, i) => (
+                    <div 
+                        key={i}
+                        className="max-w-sm mx-auto bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 hover:scale-105"
+                    >
+                        <div className="flex items-center p-4 bg-teal-600">
+                            <img 
+                                className="w-16 h-16 rounded-full object-cover border-4 border-white"
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH-blsvoWQeqmoTzZB3tISQMu2dw8R6TY4IA&s" 
+                                alt={`${r.mentee?.firstName}'s profile`} 
+                            />
+                            <div className="ml-4 text-white">
+                                <h2 className="font-bold text-lg">{r.mentee?.firstName + " " + r.mentee?.lastName}</h2>
+                                <p className="text-sm">{r.mentee?.email}</p>
+                            </div>
+                        </div>
+                        <div className="p-4 bg-gray-50">
+                            <div className="text-sm mb-2">
+                                <span className="font-medium">Resume URL: </span>
+                                <a 
+                                    href={r.resumeUrl} 
+                                    className="text-teal-600 underline"
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                >
+                                    View Resume
+                                </a>
+                            </div>
+                            <p className="text-gray-700 mb-4">
+                                Please provide status and necessary feedback.
+                            </p>
+                            <button 
+                                className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition-colors duration-300"
+                                onClick={() => handleModal(r)}
+                            >
+                                Provide Feedback
+                            </button>
+                        </div>
                     </div>
-                ) : (
-                    <p>Loading...</p>
-                )
+                ))
             }
+        </div>
+    ) : (
+        <p>Loading...</p>
+    )
+}
+
 
             {/* Modal */}
             {isModalOpen && (

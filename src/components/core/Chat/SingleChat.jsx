@@ -8,7 +8,7 @@ import ScrollableChat from './ScrollableChat';
 import axios from "axios"
 import "./styles.css"
 import io from "socket.io-client"
-import { addNotification } from '../../../slice/chatSlice';
+import { addNotification, setSelectedChat } from '../../../slice/chatSlice';
 import Lottie from 'react-lottie';
 import animationData from "./Animations/typing.json"
 
@@ -140,7 +140,7 @@ function SingleChat({fetchAgain,setFetchAgain}) {
         {selectedChat ? (
             <div className="flex flex-col w-[99%] h-full bg-slate-300">
                 <div className="text-2xl pb-2 px-2 flex justify-between items-center">
-                    <IoMdArrowRoundBack />
+                    <IoMdArrowRoundBack onClick={(e)=>dispatch(setSelectedChat(null))} />
                     {
                         messages && (
                             <>

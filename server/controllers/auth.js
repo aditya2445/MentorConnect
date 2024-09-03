@@ -232,3 +232,23 @@ exports.allUsers = async (req, res) => {
     const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
     res.send(users);
   };
+  
+exports.mentors = async (req, res) => {
+    const keyword = req.query.search
+      ? {
+        $and:[
+            {accountType:"Mentor"},
+            {
+
+                $or: [
+                    { firstName: { $regex: req.query.search, $options: "i" } },
+                    { email: { $regex: req.query.search, $options: "i" } },
+                ],
+            }
+        ]
+        }
+      : {};
+  
+    const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+    res.send(users);
+  };

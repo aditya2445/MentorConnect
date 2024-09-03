@@ -1,5 +1,5 @@
 const express = require("express");
-const { sendOtp, signUp, logIn, getUserDetails,allUsers } = require("../controllers/auth");
+const { sendOtp, signUp, logIn, getUserDetails,allUsers, mentors } = require("../controllers/auth");
 const {authMiddleware} = require("../middlewares/auth")
 const route = express.Router();
 const passport = require("passport");
@@ -12,6 +12,7 @@ route.post("/signup",signUp)
 route.post("/login",logIn)
 route.get("/getUserDetails",authMiddleware,getUserDetails)
 route.get("/",authMiddleware,allUsers)
+route.get("/mentors",authMiddleware,mentors)
 
 route.get('/google/login',
     passport.authenticate('google', { scope: ['profile', 'email'],state:'login' })

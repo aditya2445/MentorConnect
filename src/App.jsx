@@ -22,6 +22,7 @@ import Sessions from './components/Dashboard/Events/Sessions'
 import TimeSlots from './components/Dashboard/Events/TimeSlots'
 import PremDetails from './pages/PremDetails'
 import PremiumSectionDetails from './components/premium/PremiumSectionDetails'
+import Mentors from './pages/Mentors'
 
 function App() {
   const {user} = useSelector(state=>state.profile)
@@ -41,6 +42,7 @@ function App() {
       </>}
       <Route path='contact-us' element={<ContactUs/>} />
       <Route path='/verifyEmail' element={<VerifyEmail/>}/>
+      <Route path='/mentors' element={<Mentors/>}/>
       <Route path='/about-us' element={<AboutUs/>}/>
       <Route path='/chats' element={<Chat/>}/>
       <Route path='/resume-post' element={<ResumePage/>}/>

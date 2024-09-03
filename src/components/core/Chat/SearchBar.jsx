@@ -51,6 +51,7 @@ function SearchBar({onSearch}) {
       if (!chats.find((c) => c._id === data.data._id)) dispatch(setChats([data.data, ...chats]));
       dispatch(setSelectedChat(data.users));
       setLoadingChat(false);
+      setSearchResult([]);
       setOnClose(true);
     } catch (error) {
       console.log(error.message);
@@ -65,7 +66,7 @@ function SearchBar({onSearch}) {
             placeholder='Search by user or email'
             value={search}
             onChange={(e)=>setSearch(e.target.value)}
-            className='p-2 text-sm border border-black rounded-lg'
+            className='p-2 text-sm border border-black rounded-lg text-black'
         />
       </form>
         <button type='submit' className='px-2 py-2 font-sans text-sm w-10 bg-green-400 min-w-fit rounded-md' onClick={handleSearch}>Search</button>
