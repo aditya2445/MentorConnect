@@ -24,6 +24,7 @@ const Navbar = () => {
         <div className='cursor-default' onClick={()=>navigate("/mentors")}>Mentors</div>
         <div className='cursor-default' onClick={()=>navigate("/about-us")}>About Us</div>
         <div className='cursor-default' onClick={()=>navigate("/contact-us")}>Contact Us</div>
+        <div className='cursor-default' onClick={()=>navigate("/posts")}>Posts</div>
         </div> 
       {
         token && user && <div className='flex gap-x-3'>{
@@ -34,6 +35,7 @@ const Navbar = () => {
             <div className='absolute group-hover:visible transition-all duration-200 invisible bg-white flex flex-col gap-y-2 divide-y-[1px] p-3 right-[2%] top-[100%] rounded-md border-[1px] items-center'>
       <Link to={"/dashboard/my-profile"}>DashBoard</Link>
       <Link onClick={logoutHandler}>Log Out</Link>
+      <Link to={"/myposts"}>My Posts</Link>
 
     </div>
           </div>

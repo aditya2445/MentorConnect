@@ -23,6 +23,9 @@ import TimeSlots from './components/Dashboard/Events/TimeSlots'
 import PremDetails from './pages/PremDetails'
 import PremiumSectionDetails from './components/premium/PremiumSectionDetails'
 import Mentors from './pages/Mentors'
+import Posts from './pages/Posts'
+import ShowPost from './components/core/post/ShowPost'
+import MyPosts from './components/core/post/MyPosts'
 
 function App() {
   const {user} = useSelector(state=>state.profile)
@@ -45,6 +48,9 @@ function App() {
       <Route path='/mentors' element={<Mentors/>}/>
       <Route path='/about-us' element={<AboutUs/>}/>
       <Route path='/chats' element={<Chat/>}/>
+      <Route path='/posts' element={<Posts/>}/>
+      <Route path='/posts/:id' element={<ShowPost/>}/>
+      <Route path='/myposts' element={<MyPosts/>}/>
       <Route path='/resume-post' element={<ResumePage/>}/>
       <Route path='/resume-post/submitted' element={<AfterPost/>}/>
       {/* only for mentor */}
