@@ -104,8 +104,8 @@ const updatePost = async(req,res)=>{
 
 const deletePost = async(req,res)=>{
     try {
-        const postId = req.params;
-        const post = await Post.findByIdAndDelete(postId);
+        const postId = req.params.postId;
+        await Post.findByIdAndDelete(postId);
         return res.status(200).json({
             success:true,
             message:"post deleted successfully"
@@ -141,4 +141,27 @@ const myPosts = async(req,res)=>{
     }
 }
 
-module.exports = {createPost,getPosts,updatePost,deletePost,myPosts}
+const getPostById = async(req,res)=>{
+    try {
+        const {id} = req.params;
+        const post = await Post.findById(id).populate("owner",'firstName lastName email image');
+        if(!post){
+            return res.status(404).json({
+                success:false,
+                message:"Post Not Found"
+            })
+        }
+        return res.status(200).json({
+            success:true,
+            message:"Post Fetched Successfully",
+            data:post
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success:false,
+            message:error.message
+        })
+    }
+}
+
+module.exports = {createPost,getPosts,updatePost,deletePost,myPosts,getPostById}

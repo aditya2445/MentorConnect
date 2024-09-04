@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     selectedChat:null,
+    selectedPost:null,
     chats:null,
     notification:[],
     token:localStorage.getItem("token")?JSON.parse(localStorage
@@ -13,6 +14,9 @@ const chatSlice = createSlice({
     reducers:{
         setToken(state,value){
             state.token=value.payload
+        },
+        setSelectedPost(state,value){
+            state.selectedPost=value.payload
         },
         setSelectedChat(state,value){
             state.selectedChat = value.payload;
@@ -34,5 +38,5 @@ const chatSlice = createSlice({
     },
 })
 
-export const {setToken,setSelectedChat,setChats,addNotification,removeNotification,clearNotifications}=chatSlice.actions;
+export const {setToken,setSelectedChat,setChats,addNotification,removeNotification,clearNotifications,setSelectedPost}=chatSlice.actions;
 export default chatSlice.reducer; 
