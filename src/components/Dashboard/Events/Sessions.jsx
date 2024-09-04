@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Calendar, momentLocalizer,Views } from 'react-big-calendar'
 import moment from 'moment'
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import Day from './Day';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import { fetchMentors } from '../../../services/operations/mentorApi';
+import { bookSession, getAllSessions, getTimeSlots } from '../../../services/operations/sessionApi';
 
 const localizer = momentLocalizer(moment)
 
@@ -14,15 +17,83 @@ const calendarEvents = [
       end: new Date(2024, 9, 1, 12, 0),
       color:"#222222"    
     },
+    {
+      title: 'wedding',
+      start: new Date(2024, 9, 2, 10, 0), 
+      end: new Date(2024, 9, 2, 12, 0),
+      color:"#222222"    
+    },
 ];
 
 const Sessions = () => {
-  const [events, setevents] = useState(calendarEvents)
-  const {handleSubmit,register,reset,formState:{errors}} = useForm()
-  const onsubmit = (data)=>{
- console.log(data)
+  const [events, setevents] = useState([])
+  const {token} = useSelector(state=>state.auth)
+  const [loading, setloading] = useState(false)
+  const [mentors, setmentors] = useState([])
+  const [timeSlots, settimeSlots] = useState([])
+  const {handleSubmit,register,reset,formState:{errors},setValue} = useForm()
+  useEffect(()=>{
+  const fetchMent = async()=>{
+    setloading(true)
+    const res = await fetchMentors(token)
+    if(res)setmentors(res)
+    setloading(false)
+  }
+  fetchMent()
+  },[])
+
+  useEffect(()=>{
+  fetchEvents()
+  },[])
+  
+  const fetchEvents = async()=>{
+    setloading(true);
+    const res = await getAllSessions(token);
+    if(res){
+     const calendar = res.events?.map((item)=>{
+      return {
+        title:item.title,
+        start:new Date(item.startDate),
+        end:new Date(item.endDate)
+      }
+     })
+     setevents(calendar)
+    }
+      setloading(false)
+  }
+
+
+  const fetchSlots = async(data)=>{
+    setloading(true);
+    const res = await getTimeSlots(data)
+    if(res)settimeSlots(res.timeSlots)
+    setloading(false)
+  }
+
+
+  const onsubmit = async (data)=>{
+    const res =await bookSession(data,token)
+    fetchEvents()
  reset()
   }
+
+  const dateHandler = (event)=>{
+  const slot = JSON.parse(event.target.value)
+  const start = new Date (slot.start);
+  const end = new Date(slot.end);
+  const parseDateToInputFormat = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); 
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  };
+  setValue("startDate",parseDateToInputFormat(start))
+  setValue("endDate",parseDateToInputFormat(end))
+  }
+
   return (
     <div className='flex-col flex w-full items-center justify-center mt-10'>
       <div className='w-10/12 flex items-center justify-between '>
@@ -55,32 +126,78 @@ const Sessions = () => {
           )
         }
        </div>
+      <div className='flex flex-col gap-y-1'>
+        <label htmlFor="mentorId">Select the mentor you want to book</label>
+        <select 
+        name='mentorId'
+        defaultValue=""
+        {...register("mentorId",{required:true})}
+        onChange={(e) => {
+          const selectedMentorId = e.target.value;
+          if (selectedMentorId) {
+            fetchSlots(selectedMentorId);
+          }
+        }}
+        className='border-[1px] h-[40px] rounded-md  px-3'
+        >
+        <option className='' value="" disabled >Choose a mentor</option>
+       {
+            mentors?.mentors?.map((mentor,index)=>{
+            return <option key={index} value={mentor._id}>{mentor?.firstName+" "+mentor?.lastName}</option>
+        })
+       }
+        </select>
+        {
+          errors.mentorId && (
+          <span>Please select an mentor</span>
+          )
+        }
+      </div>
+
+      <div className='flex flex-col gap-y-1'>
+        <label htmlFor="timeslots"></label>
+        <select 
+        name='timeslots'
+        defaultValue=""
+        {...register("timeslots")}
+        className='border-[1px] h-[40px] rounded-md  px-3'
+        onChange={dateHandler}
+        >
+        <option className='' value="" disabled >Choose a Time Slot</option>
+       {
+            timeSlots?.map((slot,index)=>{
+            return <option key={index} value={JSON.stringify(slot)}>{new Date(slot.start).toLocaleString()+" "+new Date(slot.end).toLocaleString()}</option>
+        })
+       }
+        </select>
+      </div> 
+
        <div className='flex flex-col gap-y-1'>
-                <label htmlFor='start'>Start Date</label>
+                <label htmlFor='startDate'>Start Date</label>
                 <input
                 type='datetime-local'
-                id='start'
+                id='startDate'
                 placeholder='Enter Your Date'
-                {...register("start",{required:true})}
+                {...register("startDate",{required:true})}
                 className='border-[1px] h-[40px] rounded-md w-full px-3'
                 />
                 {
-                    errors.start && (
+                    errors.startDate && (
                         <span> start Date can't be Empty </span>
                     )
                 }
             </div>
             <div className='flex flex-col gap-y-1'>
-                <label htmlFor='end'>End Date</label>
+                <label htmlFor='endDate'>End Date</label>
                 <input
                 type='datetime-local'
-                id='end'
+                id='endDate'
                 placeholder='Enter Your Date'
-                {...register("end",{required:true})}
+                {...register("endDate",{required:true})}
                 className='border-[1px] h-[40px] rounded-md w-full px-3'
                 />
                 {
-                    errors.end && (
+                    errors.endDate && (
                         <span> end Date can't be Empty </span>
                     )
                 }
@@ -93,7 +210,7 @@ const Sessions = () => {
       events={events}
       startAccessor="start"
       endAccessor="end"
-      views={[Views.MONTH]}
+      // views={[Views.MONTH]}
       className='custom-calendar'
       eventPropGetter={(events)=>({
         style:{backgroundColor:'green'}
@@ -102,7 +219,7 @@ const Sessions = () => {
       style={{ height:"403px",width:"403px"}}
     /></div>
    <Day/>
-   
+
       </div>
       </div>
 

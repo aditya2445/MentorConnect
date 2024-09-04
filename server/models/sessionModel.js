@@ -29,7 +29,7 @@ const sessionSchema = new mongoose.Schema({
     },
     status:{
         type:String,
-        enum:["Scheduled","Completed","Cancelled"],
+        enum:["Pending","Scheduled","Completed","Cancelled"],
         default:'Scheduled',
     },
 

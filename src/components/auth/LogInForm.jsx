@@ -30,10 +30,11 @@ if(query.get('err')){
 }
   else { const token = query.get('token');
     const user = query.get('user')
+    console.log(user,token)
     if (token && user) {
         const toastId = toast.loading("Loading...")
         dispatch(setToken(token))
-        dispatch(setUser(user))
+        dispatch(setUser(JSON.parse(user)))
       localStorage.setItem('token', JSON.stringify(token));
       localStorage.setItem('user', user);
       toast.dismiss(toastId)

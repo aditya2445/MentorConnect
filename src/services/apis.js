@@ -10,7 +10,8 @@ export const auth = {
 
 export const mentor = {
     MENTOR_APP_API:BASE_URL+"/mentor/mentorApp",
-    CHECK_MENTOR_API:BASE_URL+"/mentor/checkMentor"
+    CHECK_MENTOR_API:BASE_URL+"/mentor/checkMentor",
+    FETCH_MENTORS_API:BASE_URL+"/mentor/fetchMentors"
 }
 
 export const category = {
@@ -20,7 +21,10 @@ export const category = {
 
 export const session = {
     CREATE_TIME_SLOTS:BASE_URL+"/session/createTimeSlots",
-    GET_TIME_SLOTS:BASE_URL+"/session/getTimeSlots" }
+    GET_TIME_SLOTS:BASE_URL+"/session/getTimeSlots",
+    BOOK_SESSION:BASE_URL+"/session/book-session",
+    ALL_SESSION:BASE_URL+"/session/all"
+}
 
     export const premium = {
     FETCH_PREMIUMS_API:BASE_URL+"/premium/getAllPremium",
