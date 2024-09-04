@@ -10,7 +10,6 @@ import { useLocation } from 'react-router-dom';
 import { setToken } from '../../slice/authSlice';
 import { setUser } from '../../slice/profileSlice';
 import toast from 'react-hot-toast';
-import { apiConnector } from '../../services/apiConnector';
 
 
 function useQuery() {
