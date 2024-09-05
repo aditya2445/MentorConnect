@@ -15,7 +15,7 @@ export const Mentee = [
         icon:"VscCommentDiscussion"
     },
     {
-        name:"Video calls",
+        name:"Sessions",
         linkto:"/dashboard/video-calls",
         icon:"VscDeviceCameraVideo"
     },
@@ -23,11 +23,6 @@ export const Mentee = [
         name:"My Mentors",
         linkto:"/dashboard/my-mentors",
         icon:"VscMortarBoard"
-    },
-    {
-        name:"Community",
-        linkto:"/dashboard/community",
-        icon:"VscPersonAdd"
     },
     {
         name:"Settings",
@@ -57,7 +52,7 @@ export const Mentor = [
         icon:"VscCommentDiscussion"
     },
     {
-        name:"Video calls",
+        name:"Sessions",
         linkto:"/dashboard/video-calls",
         icon:"VscDeviceCameraVideo"
     },
@@ -66,11 +61,7 @@ export const Mentor = [
         linkto:"/dashboard/my-mentees",
         icon:"VscMortarBoard"
     },
-    {
-        name:"Community",
-        linkto:"/dashboard/community",
-        icon:"VscPersonAdd"
-    },
+
     {
         name:"Settings",
         linkto:"/dashboard/settings",
@@ -98,11 +89,7 @@ export const Admin = [
         linkto:"/dashboard/create-category",
         icon:"VscEdit"
     },
-    {
-        name:"Community",
-        linkto:"/dashboard/community",
-        icon:"VscPersonAdd"
-    },
+
     {
         name:"Settings",
         linkto:"/dashboard/settings",

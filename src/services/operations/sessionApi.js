@@ -43,6 +43,7 @@ export async function bookSession(data,token) {
         if(!response?.data?.success){
             throw new Error("someting went wrong while booking a session")
         }
+       
     } catch (error) {
         console.log("Unable to book a session")
     }

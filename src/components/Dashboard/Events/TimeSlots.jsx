@@ -10,13 +10,14 @@ const TimeSlots = () => {
   const {token} = useSelector(state=>state.auth)
   const {user} = useSelector(state=>state.profile)
   const {register,handleSubmit,reset,formState:{errors}} =  useForm()
+  
 
   useEffect(()=>{
     fetchTimeSlots()
      },[])
 
      const fetchTimeSlots = async()=>{
-      const response = await getTimeSlots(user._id)
+      const response = await getTimeSlots(user?._id)
       settimeslots(response?.timeSlots)
      }
   
@@ -54,10 +55,11 @@ if (differenceInHours > 1) {
   
   return (
     <div className='mt-14 w-full '>
-      <h1>Add Time Slots</h1>
-      <p><i>for mentees to connect</i></p>
       <div className='flex justify-evenly items-center w-full'>
-      <form onSubmit={handleSubmit(onsubmit)}>
+        <div className='flex flex-col gap-y-5'>
+    <div>  <h1 className='text-3xl font-bold'>Add Time Slots</h1>
+    <p className='text-lg'><i>for mentees to connect</i></p></div>
+      <form onSubmit={handleSubmit(onsubmit)} className=' flex flex-col gap-3'>
       <div className='flex flex-col gap-y-1'>
                 <label htmlFor='start'>Start Date</label>
                 <input
@@ -90,7 +92,7 @@ if (differenceInHours > 1) {
             </div>
           <div className='flex justify-end'><button className='bg-teal-500 font-bold text-white rounded-md p-2'>Add</button></div>
       </form>
-     
+      </div>
       <div className='flex flex-col gap-y-3'>
        <h1>Your Time Slots</h1>
        <div className='flex flex-col gap-y-2'>

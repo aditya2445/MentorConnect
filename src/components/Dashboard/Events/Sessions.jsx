@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { fetchMentors } from '../../../services/operations/mentorApi';
 import { bookSession, getAllSessions, getTimeSlots } from '../../../services/operations/sessionApi';
+import toast from 'react-hot-toast';
 
 const localizer = momentLocalizer(moment)
 
@@ -51,8 +52,11 @@ const Sessions = () => {
 
   const fetchSlots = async(data)=>{
     setloading(true);
+    const toastId = toast.loading("Booking...")
     const res = await getTimeSlots(data)
     if(res)settimeSlots(res.timeSlots)
+      toast.success("Session Booked")
+    toast.dismiss(toastId)
     setloading(false)
   }
 

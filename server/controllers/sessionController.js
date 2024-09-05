@@ -120,15 +120,25 @@ const getAllSessions = async(req,res)=>{
         const userId = req.user._id;
         const sessions = await User.findById(userId).populate({
             path:"events",
-            populate:{
-                path:"mentor"
-            }
+            match: { status: { $in: ['OnGoing', 'Scheduled'] } },
+            populate:[
+                {path:"mentor"},
+                {path:"mentee"}
+            ]
+        }).exec();
+        const finished = await User.findById(userId).populate({
+            path:"events",
+            match: { status: { $in: ['Completed', 'Cancelled'] } },
+            populate:[
+                {path:"mentor"},
+                {path:"mentee"}
+            ]
         }).exec();
         
         return res.status(200).json({
             success:true,
             message:"all sessions fetched",
-            data:sessions,
+            data:{sessions,finished},
         })
     } catch (error) {
         return res.status(500).json({
