@@ -29,9 +29,24 @@ const sessionSchema = new mongoose.Schema({
     },
     status:{
         type:String,
-        enum:["Pending","Scheduled","Completed","Cancelled"],
+        enum:["Pending","OnGoing","Scheduled","Completed","Cancelled"],
         default:'Scheduled',
     },
+    roomId:{
+    type:String,
+    required:true
+    },
+    duration:{
+        type:String
+    },
+    menteeTimes: [{
+        join: { type: Date, default: null },
+        leave: { type: Date, default: null }
+    }],
+    mentorTimes: [{
+        join: { type: Date, default: null },
+        leave: { type: Date, default: null }
+    }],
 
 },{timestamps:true})
 

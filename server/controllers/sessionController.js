@@ -2,11 +2,53 @@ const Session = require("../models/sessionModel");
 const TimeSlots = require("../models/TimeSlots");
 const User = require("../models/User");
 const mongoose = require("mongoose");
+const Agenda = require("agenda");
+const { findCommonDurationInMinutesOptimized } = require("../utils/duration");
+require("dotenv").config()
+
+
+const agenda = new Agenda({ db: { address: process.env.URL } });
+
+agenda.define('update session status', async (job) => {
+  try {
+    const now = new Date();
+
+   
+    const sessionsToUpdate = await Session.find({ endDate: { $lt: now }, status: 'OnGoing' });
+    const sessionsToStart = await Session.find({ startDate: { $lt: now }, status: 'Scheduled' });
+    
+
+    for (let session of sessionsToUpdate) {
+       const duration = findCommonDurationInMinutesOptimized(session.mentorTimes,session.menteeTimes);
+        session.duration = duration.toString()
+        if(duration>1)
+      session.status = "Completed";
+    else session.status = "Cancelled"
+      await session.save();
+    }
+    for (let session of sessionsToStart) {
+        session.status = 'OnGoing'; 
+        await session.save();
+      }
+
+  } catch (error) {
+    console.error('Error updating session status:', error);
+  }
+});
+
+(async function () {
+  await agenda.start();
+  await agenda.every('1 minute', 'update session status');
+})();
+
+
+
 const bookSession = async(req,res)=>{
     try {
         const {mentorId,title,description,startDate,endDate,status="Pending"} = req.body;
         const mentor = await User.findById(mentorId,{accountType:"Mentor"});
         const menteeId = req.user._id;
+        const roomId = Date.now()
         if(!mentor || !menteeId){
             return res.status(400).json({
                 success:false,
@@ -33,6 +75,10 @@ const bookSession = async(req,res)=>{
                 mentee:menteeId,
                 startDate:new Date(startDate),
                 endDate:new Date(endDate),
+                duration:"0",
+                roomId:roomId,
+                menteeTimes:[],
+                mentorTimes:[],
                 status:"Scheduled"
             })
             await User.findByIdAndUpdate(mentorId,{$push:{events:session._id}},{new:true})
@@ -49,6 +95,10 @@ const bookSession = async(req,res)=>{
             menteeId:menteeId,
             startDate:new Date(startDate),
             endDate:new Date(endDate),
+            duration:"0",
+            roomId:roomId,
+            menteeTimes:[],
+            mentorTimes:[],
             status:"Pending"
         })
         
@@ -68,7 +118,12 @@ const bookSession = async(req,res)=>{
 const getAllSessions = async(req,res)=>{
     try {
         const userId = req.user._id;
-        const sessions = await User.findById(userId).populate("events");
+        const sessions = await User.findById(userId).populate({
+            path:"events",
+            populate:{
+                path:"mentor"
+            }
+        }).exec();
         
         return res.status(200).json({
             success:true,
@@ -178,6 +233,25 @@ const deleteSession = async(req,res)=>{
     }
 }
 
+const sessionTimeUpdate = async(req,res)=>{
+  try {
+    
+    const {roomId,join,leave,role} = req.body;
+   if(role === "Mentee"){ const session = await Session.findOneAndUpdate({roomId:roomId},{$push:{menteeTimes:{join:new Date(join),leave:new Date(leave)}}},{new:true})
+}
+else {const session = await Session.findOneAndUpdate({roomId:roomId},{$push:{mentorTimes:{join:new Date(join),leave:new Date(leave)}}},{new:true})}
+return res.status(200).json({ 
+    success:true,
+    message: "join and leave updated" 
+});
+  } catch (error) {
+    return res.status(500).json({ 
+        success:false,
+        message: error.message 
+    });
+  }
+}
 
-module.exports = {bookSession,getSessionById,updateSessionStatus,addFeedback,deleteSession,getAllSessions}
+
+module.exports = {bookSession,getSessionById,updateSessionStatus,addFeedback,deleteSession,getAllSessions,sessionTimeUpdate}
 

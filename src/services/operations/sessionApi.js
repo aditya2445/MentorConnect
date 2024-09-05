@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import {session} from '../apis'
 
-const {CREATE_TIME_SLOTS,GET_TIME_SLOTS,BOOK_SESSION,ALL_SESSION} = session
+const {CREATE_TIME_SLOTS,GET_TIME_SLOTS,BOOK_SESSION,ALL_SESSION,TIME_UPDATES} = session
 
 
 export async function createTimeSlots(data,token) {
@@ -63,4 +63,20 @@ export async function getAllSessions(token) {
         console.log("Unable to fetch the sessions")
     } 
     return res;
+}
+
+export async function timeUpdates(data) {
+
+    try {
+        console.log(data)
+        const response = await apiConnector("POST",TIME_UPDATES,data)
+        if(response)console.log(response)
+        if(!response?.data?.success){
+            throw new Error("someting went wrong while updating time ")
+        }
+      
+    } catch (error) {
+        console.log("Unable to updating")
+    } 
+   
 }

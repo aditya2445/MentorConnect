@@ -10,21 +10,6 @@ import { bookSession, getAllSessions, getTimeSlots } from '../../../services/ope
 
 const localizer = momentLocalizer(moment)
 
-const calendarEvents = [
-  {
-      title: 'Meeting',
-      start: new Date(2024, 9, 1, 10, 0), 
-      end: new Date(2024, 9, 1, 12, 0),
-      color:"#222222"    
-    },
-    {
-      title: 'wedding',
-      start: new Date(2024, 9, 2, 10, 0), 
-      end: new Date(2024, 9, 2, 12, 0),
-      color:"#222222"    
-    },
-];
-
 const Sessions = () => {
   const [events, setevents] = useState([])
   const {token} = useSelector(state=>state.auth)
@@ -54,7 +39,8 @@ const Sessions = () => {
       return {
         title:item.title,
         start:new Date(item.startDate),
-        end:new Date(item.endDate)
+        end:new Date(item.endDate),
+        status:item.status
       }
      })
      setevents(calendar)
@@ -213,7 +199,10 @@ const Sessions = () => {
       // views={[Views.MONTH]}
       className='custom-calendar'
       eventPropGetter={(events)=>({
-        style:{backgroundColor:'green'}
+       style:{backgroundColor:events.status === "Scheduled" ? "yellow" : events.status === "Completed" ? "#2dc04a" : "red",
+        color:"black",
+        fontWeight:"bold"
+        } 
       })
       }
       style={{ height:"403px",width:"403px"}}

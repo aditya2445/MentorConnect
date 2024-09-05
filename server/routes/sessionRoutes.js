@@ -7,6 +7,7 @@ const{
     updateSessionStatus,
     addFeedback,
     deleteSession,
+    sessionTimeUpdate,
 } = require("../controllers/sessionController")
 const {authMiddleware,isMentor, isMentee} = require("../middlewares/auth");
 const { createTimeSlot, getTimeSlot } = require('../controllers/timeSlot');
@@ -19,6 +20,7 @@ router.patch('/:sessionId/feedback',authMiddleware,addFeedback);
 router.delete('/:sessionId', authMiddleware,deleteSession);
 router.post("/createTimeSlots",authMiddleware,isMentor,createTimeSlot)
 router.post("/getTimeSlots",getTimeSlot)
+router.post("/time",sessionTimeUpdate)
 
 
 module.exports = router;

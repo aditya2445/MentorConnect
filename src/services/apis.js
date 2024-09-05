@@ -23,7 +23,8 @@ export const session = {
     CREATE_TIME_SLOTS:BASE_URL+"/session/createTimeSlots",
     GET_TIME_SLOTS:BASE_URL+"/session/getTimeSlots",
     BOOK_SESSION:BASE_URL+"/session/book-session",
-    ALL_SESSION:BASE_URL+"/session/all"
+    ALL_SESSION:BASE_URL+"/session/all",
+    TIME_UPDATES:BASE_URL+"/session/time"
 }
 
     export const premium = {
