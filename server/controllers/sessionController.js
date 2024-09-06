@@ -62,7 +62,6 @@ const bookSession = async(req,res)=>{
                 message:"Slot is Already booked"
             })
         }
-        
         const isSlotAvailable = await TimeSlots.findOne({$and:[{mentor:mentorId},{start:new Date(startDate)},{end:new Date(endDate)}]})
         
         if(isSlotAvailable){
@@ -91,8 +90,8 @@ const bookSession = async(req,res)=>{
         const session = await Session.create({
             title:title,
             description:description,
-            mentorId:mentorId,
-            menteeId:menteeId,
+            mentor:mentorId,
+            mentee:menteeId,
             startDate:new Date(startDate),
             endDate:new Date(endDate),
             duration:"0",
@@ -101,7 +100,6 @@ const bookSession = async(req,res)=>{
             mentorTimes:[],
             status:"Pending"
         })
-        
         res.status(201).json({
             success:true,
             message: "Session requst sent", 

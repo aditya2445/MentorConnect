@@ -19,7 +19,7 @@ const matchRoute=(route)=>{
        ? <div className='relative group'>
         <p className={`flex items-center  gap-x-1`}><span><Icon/> </span>{item.name} <MdKeyboardArrowDown className='text-lg'/></p>
         <div className='absolute z-40 bg-white  invisible transition-all duration-200 group-hover:visible flex gap-y-2 border-[1px] rounded-md top-8 items-center p-2 divide-y-[1px] flex-col w-[150px]'>
-      {user?.accountType==="Mentee" && <Link to={"/dashboard/sessions"} className='w-full'>Book A Session</Link>}
+      {user?.accountType === "Mentee" && <Link to={"/dashboard/sessions"} className='w-full'>Book A Session</Link>}
       {user?.accountType === "Mentor" && <Link to={"/dashboard/time-slots"} className='w-full'>Add Time Slots</Link>}
       {user?.accountType === "Mentor" && <Link  className='w-full'>Webinars</Link>}
       <Link  className='w-full'>Interview Prep</Link>

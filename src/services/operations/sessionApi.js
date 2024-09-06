@@ -35,18 +35,20 @@ export async function getTimeSlots(userId) {
 }
 
 export async function bookSession(data,token) {
+    const toastId = toast.loading("Booking...")
     try {
         const response = await  apiConnector("POST",BOOK_SESSION,data,{
             Authorization:`Bearer ${token}`
         })
-     
+      if(response)console.log(response)
         if(!response?.data?.success){
             throw new Error("someting went wrong while booking a session")
         }
-       
+       toast.success(response?.data?.message)
     } catch (error) {
         console.log("Unable to book a session")
     }
+toast.dismiss(toastId)
 }
 
 export async function getAllSessions(token) {

@@ -52,17 +52,16 @@ const Sessions = () => {
 
   const fetchSlots = async(data)=>{
     setloading(true);
-    const toastId = toast.loading("Booking...")
+    
     const res = await getTimeSlots(data)
     if(res)settimeSlots(res.timeSlots)
-      toast.success("Session Booked")
-    toast.dismiss(toastId)
+    
     setloading(false)
   }
 
 
   const onsubmit = async (data)=>{
-    const res =await bookSession(data,token)
+    const res = await bookSession(data,token) 
     fetchEvents()
  reset()
   }

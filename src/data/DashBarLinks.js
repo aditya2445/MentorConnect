@@ -11,7 +11,7 @@ export const Mentee = [
     },
     {
         name:"My Chats",
-        linkto:"/dashboard/my-chats",
+        linkto:"/dashboard/chats",
         icon:"VscCommentDiscussion"
     },
     {
@@ -48,7 +48,7 @@ export const Mentor = [
     },
     {
         name:"My Chats",
-        linkto:"/dashboard/my-chats",
+        linkto:"/dashboard/chats",
         icon:"VscCommentDiscussion"
     },
     {

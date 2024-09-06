@@ -47,7 +47,6 @@ function App() {
       <Route path='/verifyEmail' element={<VerifyEmail/>}/>
       <Route path='/mentors' element={<Mentors/>}/>
       <Route path='/about-us' element={<AboutUs/>}/>
-      <Route path='/chats' element={<Chat/>}/>
       <Route path='/posts' element={<Posts/>}/>
       <Route path='/posts/:id' element={<ShowPost/>}/>
       <Route path='/myposts' element={<MyPosts/>}/>
@@ -63,7 +62,8 @@ function App() {
        <Route path='/dashboard/video-calls' element={<VideoCalls/>}/>
        <Route path='/video-calls/:roomId' element={<Room/>}/>
        <Route path='/dashboard/sessions' element={<Sessions/>}/>
-       { user?.accountType === "Mentor" && <Route path='/dashboard/time-slots' element={<TimeSlots/>}/>}
+       {user?.accountType === "Mentor" && <Route path='/dashboard/time-slots' element={<TimeSlots />}/>}
+       <Route path='/dashboard/chats' element={<Chat/>}/>
       </Route>
       <Route>
         <Route path='/premium' element={<PremDetails/>}/>
