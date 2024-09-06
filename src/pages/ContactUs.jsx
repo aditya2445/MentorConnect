@@ -25,7 +25,7 @@ const ContactUs = () => {
     <div className='flex gap-24 items-center flex-col justify-center'>
         <div className='w-9/12 relative  flex items-center justify-end mt-20'>
         <div className='w-[1000px] lg:pl-[250px] lg:py-[50px] lg:pr-[50px] h-[600px] border-[1px] rounded-md'>
-        <div className='w-[350px] lg:visible invisible p-5 bg-teal-500 absolute justify-between left-0 top-[50px] rounded-md  h-[500px] border-[1px] flex flex-col'>
+        <div className='contact w-[350px] text-white lg:visible invisible p-5  absolute justify-between left-0 top-[50px] rounded-md  h-[500px] border-[1px] flex flex-col'>
         <div className='flex flex-col gap-y-3'><h1 className='text-3xl font-bold'>Contact With Us</h1>
         <p><i>“We’re here to help you find the right mentor for your journey.”</i></p></div>
         <div className='flex flex-col'>
@@ -57,7 +57,7 @@ const ContactUs = () => {
        <form onSubmit={handleSubmit(onsubmit)} className='flex flex-col gap-y-3'>
        <div className='lg:flex gap-3 justify-between  '>
   <div className='flex flex-col gap-y-1 w-[48%] '>
-  <label className='text-[16px] font-bold' htmlFor='firstName'>First Name</label>
+  <label className='text-[16px] ' htmlFor='firstName'>First Name</label>
                 <input
                 type='text'
                 id='firstName'
@@ -72,7 +72,7 @@ const ContactUs = () => {
                 }
   </div>
   <div className='flex flex-col gap-y-1 w-[48%]'>
-  <label className='text-[16px] font-bold' htmlFor='lastName'>Last Name</label>
+  <label className='text-[16px] ' htmlFor='lastName'>Last Name</label>
                 <input
                 type='text'
                 id='lastName'
@@ -90,7 +90,7 @@ const ContactUs = () => {
 
 
  <div className='flex flex-col gap-y-1'>
-                <label className='text-[16px] font-bold' htmlFor='email'>Email Address</label>
+                <label className='text-[16px] ' htmlFor='email'>Email Address</label>
                 <input
                 type='email'
                 id='email'
@@ -107,7 +107,7 @@ const ContactUs = () => {
 
 
             <div className='flex flex-col gap-y-1'>
-                <label className='text-[16px] font-bold' htmlFor='contact'>Contact No</label>
+                <label className='text-[16px]' htmlFor='contact'>Contact No</label>
                 <input
                 type='contact'
                 id='contact'
@@ -119,7 +119,7 @@ const ContactUs = () => {
 
 
             <div className='flex flex-col gap-y-1'>
-        <label className='text-[16px] font-bold' htmlFor="message">Message</label>
+        <label className='text-[16px] ' htmlFor="message">Message</label>
         <textarea
         name='message'
         {...register("message",{required:true})}

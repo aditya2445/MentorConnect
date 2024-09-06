@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import {session} from '../apis'
 
-const {CREATE_TIME_SLOTS,GET_TIME_SLOTS,BOOK_SESSION,ALL_SESSION,TIME_UPDATES} = session
+const {CREATE_TIME_SLOTS,GET_TIME_SLOTS,BOOK_SESSION,ALL_SESSION,TIME_UPDATES,SESSION_REQUESTS,ACCEPT_REQ,REJECT_REQ} = session
 
 
 export async function createTimeSlots(data,token) {
@@ -83,3 +83,52 @@ export async function timeUpdates(data) {
     } 
    
 }
+
+export async function getSessionRequests(token) {
+    let res;
+    try {
+        const response = await apiConnector("POST",SESSION_REQUESTS,null,{
+            Authorization:`Bearer ${token}`
+        })
+        if(!response?.data?.success){
+            throw new Error("someting went wrong while fetching the sessions")
+        }
+        res= response?.data?.data
+    } catch (error) {
+        console.log("Unable to fetch the sessions")
+    } 
+    return res;
+}
+
+export async function AcceptRequest(token,data) {
+
+    try {
+        const response = await apiConnector("POST",ACCEPT_REQ,{data},{
+            Authorization:`Bearer ${token}`
+        })
+        if(!response?.data?.success){
+            throw new Error("someting went wrong while accepting the req")
+        }
+ 
+    } catch (error) {
+        console.log("Unable to accept the req")
+    } 
+    
+}
+
+export async function RejectRequest(token,data) {
+
+    try {
+        const response = await apiConnector("POST",REJECT_REQ,{data},{
+            Authorization:`Bearer ${token}`
+        })
+        if(!response?.data?.success){
+            throw new Error("someting went wrong while rejecting the req")
+        }
+ 
+    } catch (error) {
+        console.log("Unable to reject the req")
+    } 
+    
+}
+

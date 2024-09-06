@@ -122,7 +122,8 @@ const getAllSessions = async(req,res)=>{
             populate:[
                 {path:"mentor"},
                 {path:"mentee"}
-            ]
+            ],
+            options: { sort: { startDate: 1 } }
         }).exec();
         const finished = await User.findById(userId).populate({
             path:"events",
@@ -130,7 +131,8 @@ const getAllSessions = async(req,res)=>{
             populate:[
                 {path:"mentor"},
                 {path:"mentee"}
-            ]
+            ],
+            options: { sort: { startDate: 1 } }
         }).exec();
         
         return res.status(200).json({
@@ -145,6 +147,7 @@ const getAllSessions = async(req,res)=>{
         })        
     }
 }
+
 
 const getSessionById = async(req,res)=>{
     try {

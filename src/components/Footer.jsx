@@ -3,7 +3,7 @@ import { FaFacebook, FaInstagram, FaTwitter, FaWhatsapp } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <div className='bg-teal-700 flex text-white items-center justify-center h-[504px] w-full'>
+    <div className='bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 flex text-white items-center justify-center h-[504px] w-full'>
         <div className='flex w-10/12 items-center justify-between'>
             <div className='w-[40%] flex flex-col items-start gap-y-5'>
                 <p className='text-[28px] font-bold'>E-Learn</p>

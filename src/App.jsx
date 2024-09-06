@@ -62,7 +62,7 @@ function App() {
        <Route path='/dashboard/video-calls' element={<VideoCalls/>}/>
        <Route path='/video-calls/:roomId' element={<Room/>}/>
        <Route path='/dashboard/sessions' element={<Sessions/>}/>
-       {user?.accountType === "Mentor" && <Route path='/dashboard/time-slots' element={<TimeSlots />}/>}
+      <Route path='/dashboard/time-slots' element={<TimeSlots />}/>
        <Route path='/dashboard/chats' element={<Chat/>}/>
       </Route>
       <Route>
