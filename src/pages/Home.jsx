@@ -18,7 +18,9 @@ import  Group124 from "../assets/Group\ 124.png"
 import contact from "../assets/Group\ 1000004154.png"
 import { useNavigate } from 'react-router-dom'
 import Footer from '../components/Footer'
-
+import Group1 from '../assets/Group1.png'
+import Group2 from '../assets/Group2.png'
+import { IoCalendarOutline } from "react-icons/io5";
 
 
 const Home = () => {
@@ -26,13 +28,28 @@ const Home = () => {
   return (
   <div className='flex flex-col items-center w-full justify-center'>
     {/* Section 1 */}
-   <div className='home w-full h-[655px]   flex items-center justify-center ' >
-   <div className='flex w-10/12 h-full items-start'> <div className='w-[50%] flex flex-col items-start justify-evenly h-full'><h1 className='text-5xl leading-normal text-white'>Connect with experienced Mentors who have walked the path you are aiming for</h1>
-    <p className='text-white text-[20px]'><i>a Solution for easy and flexible online learning,<br/> you can study anywhere through this platform</i></p>
-    <button className='bg-[#D9D9ED] p-3 rounded-l-2xl rounded-b-2xl'>Kickstart First Your Call</button></div></div>
+   <div className='w-10/12 h-[655px] flex items-center justify-center mb-14 '>
+    <div className='w-[55%] mt-20 h-full flex flex-col justify-center gap-y-10  '>
+      <h1 className='text-2xl font-bold'>Unlock Your Potential with <span className='font-bold  bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text'> MentConnect,</span> <br/>Where Guidance Meets Growth</h1>
+      <div class="animated-text font-bold text-4xl">
+       <h1> We Provide You With</h1> <span className=''></span>
+    </div>
+    <div>
+    <button className='bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-white p-3 rounded-l-2xl rounded-b-2xl font-semibold'>Book Your Free Demo</button>
+
+    </div>
+      <div className='flex flex-col gap-y-5'>
+      <p className='font-semibold'><i>Mentor Connect connects you with experienced mentors ,<br/> who can guide your personal and professional growth. Whether<br/> you're looking to learn new skills  or advance your career,<br/> our mentors are here to support your journey. Join today and<br/> unlock the power of mentorship.</i></p>
+    
+      </div>
+    </div>
+    <div className='w-[40%] h-full flex items-center justify-center relative'>
+      <img src={Group1} alt="" className='object-contain' />
+      <div className='absolute'><img src={Group2} alt="" /></div>
+    </div>
    </div>
    {/* Section 2 */}
-   <div className='w-full border-b-[1px] h-[100px]   flex items-center justify-center '>
+   <div className='w-full border-y-[1px] h-[100px]    flex items-center justify-center '>
     <div className='w-10/12 flex items-center justify-around'>
     <img  className='w-[150px] h-[60px] object-cover' src={google} alt=''/>
     <img  className='w-[150px] h-[60px] object-scale-down bg-black' src={Amazon} alt=''/>
@@ -43,8 +60,8 @@ const Home = () => {
    </div>
    {/* Section 3 */}
    <div className='w-10/12 flex flex-col items-center mt-24  justify-center gap-y-5 '>
-   <h1 className='text-4xl font-bold'>All-In-One <span className='text-teal-500'>Mentorship Platform</span></h1>
-   <p className='text-[24px] text-center'><span className='text-teal-500'>MentConnect</span> is a dynamic web platform built for mentorship of <br/> Undergraduates,Enterpreneurs and Freelancers</p>
+   <h1 className='text-4xl font-bold'>All-In-One <span className=' bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text'>Mentorship Platform</span></h1>
+   <p className='text-[24px] text-center'><span className=' bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text'>MentConnect</span> is a dynamic web platform built for mentorship of <br/> Undergraduates,Enterpreneurs and Freelancers</p>
    <div className='flex items-center w-full justify-evenly mt-10'>
     <div className='flex flex-col w-[300px] rounded-md relative h-[320px] shadow-2xl  items-center justify-center p-5 gap-y-5'>
     <img src={Group80} alt="" className='w-[130px] top-[-15%] h-[130px] absolute' />
@@ -65,8 +82,8 @@ const Home = () => {
    </div>
    {/* Section 4 */}
    <div className='w-10/12 flex flex-col gap-y-5 mt-24 items-center justify-center'>
-   <h1 className='text-4xl font-bold'>What is <span className='text-teal-500'>MentConnect?</span> </h1>
-   <p className='text-[22px] text-center'><span className='text-teal-500 '>MentConnect</span> is a web platform that connects mentees with industry mentors for <br/> personalized career guidance, skill development, and job referrals. </p>
+   <h1 className='text-4xl font-bold'>What is <span className=' bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text'>MentConnect?</span> </h1>
+   <p className='text-[22px] text-center'><span className=' bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text'>MentConnect</span> is a web platform that connects mentees with industry mentors for <br/> personalized career guidance, skill development, and job referrals. </p>
    <div className='flex items-center justify-evenly w-full mt-10'>
     <div className='w-[350px] h-[250px] border-[1px]'></div>
     <div className='w-[350px] h-[250px] border-[1px]'></div>
@@ -74,7 +91,7 @@ const Home = () => {
    </div>
    {/* Section 4 */}
    <div className='w-10/12 flex flex-col items-center mt-24  justify-center gap-y-5 '>
-   <h1 className='text-4xl font-bold'>Discover Our <span className='text-teal-500'>Mentors</span></h1>
+   <h1 className='text-4xl font-bold'>Discover Our <span className='bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text'>Mentors</span></h1>
    <p className='text-[24px] text-center'>We have industry Experts as Mentor who guide you with <br/>  Career Planning & Interview Preparation</p>
    <div className='flex items-center w-full justify-evenly mt-10'>
     <div className='flex flex-col w-[350px] h-[430px] rounded-md  shadow-2xl  items-center justify-between p-5 '>
@@ -116,13 +133,13 @@ const Home = () => {
    </div>
    {/* Section 5 */}
    <div className='w-10/12 flex flex-col items-center mt-24  justify-center gap-y-5'>
-   <h1 className='text-4xl font-bold'>Our <span className='text-teal-500'>Features</span></h1>
+   <h1 className='text-4xl font-bold'>Our <span className='bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text'>Features</span></h1>
    <p className='text-[22px]'>These extraordinary features can make learning activities more efficient</p>
    <div className='w-full flex items-center justify-evenly mt-5'>
     <img src={Group106} alt="" className='w-[45%]'/>
     <div className='flex items-start flex-col gap-y-5'>
       <p className='text-4xl font-bold'>One-on-One</p>
-      <p className='text-teal-500 text-4xl font-bold'>MentorShip Sessions</p>
+      <p className='bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text text-4xl font-bold'>MentorShip Sessions</p>
       <p className='text-2xl'>Teachers and teacher assistants can <br/> talk with students privately without<br/> leaving the Zoom environment.</p>
     </div>
 
@@ -130,7 +147,7 @@ const Home = () => {
    <div className='w-full flex flex-row-reverse items-center justify-evenly mt-5'>
     <img src={Group107} alt="" className='w-[45%]'/>
     <div className='flex items-start flex-col gap-y-5'>
-      <p className=' text-4xl font-bold'>A user <span className='text-teal-500'>friendly Video</span> Calling<br/> Feature for webinars</p>
+      <p className=' text-4xl font-bold'>A user <span className='bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text'>friendly Video</span> Calling<br/> Feature for webinars</p>
        <div className='flex items-center justify-between mt-5 gap-x-10'>
         <img src={Group72} alt="" />
         <p className='text-2xl'>Teachers don’t get lost in the grid <br/> view and have a dedicated Podium space.
@@ -151,7 +168,7 @@ const Home = () => {
    <div className='w-full flex items-center justify-evenly mt-14'>
     <img src={Group124} alt="" className='w-[45%]'/>
     <div className='flex items-start flex-col gap-y-5'>
-      <p className='text-teal-500 text-4xl font-bold'>Ratings and Levels<br/> system <span className='text-black'>for Mentees</span></p>
+      <p className='bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text text-4xl font-bold'>Ratings and Levels<br/> system <span className='text-black'>for Mentees</span></p>
       <p className='text-2xl'>Class provides tools to help run and manage<br/> the class such as Class Roster, Attendance,<br/> and more. With the Gradebook, teachers can<br/> review and grade tests and quizzes in real-
       <br/>time.
       </p>
@@ -204,7 +221,7 @@ const Home = () => {
     <div className='flex flex-col gap-y-5 '>
      <div className='flex flex-col gap-y-5'> <h1 className='text-4xl font-bold'>Enroll In Our Webinars<br/> & Improve Your Skill.</h1>
      <p className='text-xl'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br/> Tincidunt amet sit placerat diam praesent pharetra at.<br/> Gravida ornare mauris pretium tortor, ac in nulla eleifend.</p></div>
-     <div className='flex items-start mt-5'><button onClick={()=>navigate("/contact-us")} className='p-3 text-md rounded-b-2xl rounded-l-2xl text-white bg-teal-500'>Contact Us</button></div>
+     <div className='flex items-start mt-5'><button onClick={()=>navigate("/contact-us")} className='p-3 text-md rounded-b-2xl rounded-l-2xl text-white bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 '>Contact Us</button></div>
      <div className='flex items-center gap-x-5 mt-5'>
       <div className='flex flex-col border-l-2 p-3 gap-y-3'><p className='text-3xl font-bold'>586K+ <span className='text-xl'>students</span></p>
       <p className='text-[16px]'>Lorem upsum dolor sit amet,<br/> consectetur adipiscing elit.</p>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 // import { setSelectedChat } from '../../../slice/chatSlice'
 import { IoMdArrowRoundBack } from "react-icons/io";
@@ -79,6 +79,7 @@ function SingleChat({fetchAgain,setFetchAgain}) {
             console.log("PrintingData",data);
             socket.emit("new message", data.data);
             setMessages([...messages, data.data]);
+            setFetchAgain(!fetchAgain)
             // console.log(messages);
           } catch (error) {
            console.log(error.message);
@@ -135,17 +136,17 @@ function SingleChat({fetchAgain,setFetchAgain}) {
           }
         }, timerLength);
       };
+
   return (
         <>
         {selectedChat ? (
-            <div className="flex flex-col w-[99%] h-full bg-slate-300">
-                <div className="text-2xl pb-2 px-2 flex justify-between items-center">
-                    <IoMdArrowRoundBack onClick={(e)=>dispatch(setSelectedChat(null))} />
+            <div className="flex flex-col w-full h-[650px] ">
+                <div className="text-xl px-3 py-2 flex justify-between items-center">
                     {
                         messages && (
                             <>
-                            {console.log(selectedChat)}
-                                {getSender(user, selectedChat.users)}
+                            <div className='flex gap-x-3 items-center'><img src={getSenderFull(user,selectedChat.users)?.image ? getSenderFull(user,selectedChat.users)?.image : `https://api.dicebear.com/5.x/initials/svg?seed=${getSenderFull(user, selectedChat.users).firstName} ${getSenderFull(user, selectedChat.users).lastName }` } alt="" className='h-[40px] w-[40px] rounded-full ' />
+                                {getSenderFull(user, selectedChat.users).firstName+" "+getSenderFull(user, selectedChat.users).lastName}</div>
                                 <ProfileModal 
                                     user={getSenderFull(user, selectedChat.users)}
                                 />
@@ -153,14 +154,14 @@ function SingleChat({fetchAgain,setFetchAgain}) {
                         )
                     }
                 </div>
-                <div style={{scrollbarWidth:'none'}} className="flex-1 overflow-y-scroll">
+                <div   className="flex-1 p-3 bg-[#ECE5DD] overflow-y-scroll">
                     {loading ? (
                         <p>Loading...</p>
                     ) : (
                         <ScrollableChat messages={messages} />
                     )}
                 </div>
-                <div className="p-3 bg-gray-300 sticky bottom-0 w-full">
+                <div className=" bottom-0 w-full px-2">
                     {istyping ? (
                         <div>
                         <Lottie
@@ -176,7 +177,7 @@ function SingleChat({fetchAgain,setFetchAgain}) {
                     <input
                         type="text"
                         onKeyDown={sendMessage}
-                        className="bg-gray-500 text-yellow-300 w-full p-2 rounded"
+                        className=" w-full p-2 outline-none rounded"
                         value={newMessage}
                         onChange={typingHandler}
                         placeholder="Enter A Message"
@@ -184,8 +185,8 @@ function SingleChat({fetchAgain,setFetchAgain}) {
                 </div>
             </div>
         ) : (
-            <div className="flex items-center justify-center h-full">
-                <p className="text-3xl pb-1 font-sans">
+            <div className="flex items-center justify-center w-full h-full">
+                <p className="text-2xl font-sans">
                     Please Select A Chat
                 </p>
             </div>

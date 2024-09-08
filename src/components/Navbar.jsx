@@ -17,19 +17,19 @@ const Navbar = () => {
   const {user} = useSelector(state=>state.profile)
   const {token} = useSelector(state=>state.auth)
   return (
-    <div className='flex flex-col bg-white w-full relative z-30 items-center '>
+    <div className='flex  flex-col text-black  w-full relative z-30 items-center '>
     <div className='h-[60px]  flex justify-between items-center px-10 w-full'>
       <div onClick={()=>navigate("/")} className='flex text-black items-center gap-x-2 font-bold text-lg'><FaSeedling/> MentConnect</div> 
       <div className='flex gap-x-10 items-center justify-center font-semibold '>
-        <div className={`cursor-default hover:text-green-500 ${location.pathname === "/" ? "text-green-500 border-b-2 border-green-500" : "text-black"}`}  onClick={()=>navigate("/")}>Home</div>
-        <div className={`cursor-default hover:text-green-500 ${location.pathname === "/mentors" ? "text-green-500 border-b-2 border-green-500" : "text-black"}`} onClick={()=>navigate("/mentors")}>Mentors</div>
-        <div className={`cursor-default hover:text-green-500 ${location.pathname === "/about-us" ? "text-green-500 border-b-2 border-green-500" : "text-black"}`} onClick={()=>navigate("/about-us")}>About Us</div>
-        <div className={`cursor-default hover:text-green-500 ${location.pathname === "/contact-us" ? "text-green-500 border-b-2 border-green-500" : "text-black"}`} onClick={()=>navigate("/contact-us")}>Contact Us</div>
-        <div className={`cursor-default hover:text-green-500 ${location.pathname === "/posts" ? "text-green-500 border-b-2 border-green-500" : "text-black"}`} onClick={()=>navigate("/posts")}>Community</div>
+        <div className={`cursor-default hover:bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 hover:text-transparent hover:bg-clip-text ${location.pathname === "/" ? "bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text" : "text-black"}`}  onClick={()=>navigate("/")}>Home</div>
+        <div className={`cursor-default hover:bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 hover:text-transparent hover:bg-clip-text ${location.pathname === "/mentors" ? "bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text" : "text-black"}`} onClick={()=>navigate("/mentors")}>Mentors</div>
+        <div className={`cursor-default hover:bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 hover:text-transparent hover:bg-clip-text ${location.pathname === "/about-us" ? "bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text" : "text-black"}`} onClick={()=>navigate("/about-us")}>About Us</div>
+        <div className={`cursor-default hover:bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 hover:text-transparent hover:bg-clip-text ${location.pathname === "/contact-us" ? "bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text" : "text-black"}`} onClick={()=>navigate("/contact-us")}>Contact Us</div>
+        <div className={`cursor-default hover:bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 hover:text-transparent hover:bg-clip-text ${location.pathname === "/posts" ? "bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text " : "text-black"}`} onClick={()=>navigate("/posts")}>Community</div>
         </div> 
       {
         token && user && <div className='flex gap-x-3'>{
-          user?.accountType === "Mentee"  && <button onClick={()=>navigate('/apply-mentor')} className='border-[1px] text-white rounded-md p-2 bg-emerald-700 font-bold'>Become A Mentor</button>}
+          user?.accountType === "Mentee"  && <button onClick={()=>navigate('/apply-mentor')} className='border-[1px] text-white rounded-md p-2 bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 font-bold'>Become A Mentor</button>}
           <div className='flex gap-x-2 group items-center'>
             <img src={user?.image} alt="" className='w-[35px] h-[35px] rounded-full'/>
             <MdKeyboardArrowDown className='text-xl'/>
@@ -44,8 +44,8 @@ const Navbar = () => {
       }
       {
         !token && !user && <div className='flex gap-x-3'>
-          <button onClick={()=>navigate('/login')} className='border-[1px] hover:bg-teal-500 hover:text-white transition-all duration-100 rounded-md p-2 font-bold'>Log In</button>
-          <button onClick={()=>navigate('/signup')} className='border-[1px] rounded-md p-2 font-bold  hover:bg-teal-500 hover:text-white transition-all duration-100'>Sign Up</button>
+          <button onClick={()=>navigate('/login')} className='border-[1px] hover:bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 hover:text-white transition-all duration-100 rounded-md p-2 font-bold'>Log In</button>
+          <button onClick={()=>navigate('/signup')} className='border-[1px] rounded-md p-2 font-bold  hover:bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 hover:text-white transition-all duration-100'>Sign Up</button>
         </div>
       }
     </div>

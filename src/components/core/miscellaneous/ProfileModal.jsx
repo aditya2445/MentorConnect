@@ -12,7 +12,7 @@ function ProfileModal({user,children}) {
       </span>
     ) : (
       <button onClick={openModal} className="flex items-center justify-center p-2 bg-gray-200 rounded-full">
-        <FaEye className="w-6 h-6 text-gray-600" />
+        <FaEye className="w-3 h-3 " />
       </button>
     )}
 

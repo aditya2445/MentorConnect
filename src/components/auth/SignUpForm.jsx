@@ -116,7 +116,7 @@ const signupHandler = async()=>{
             </div>
 
           
-            <button className='border-[1px] bg-teal-700 text-white h-[40px] rounded-md mt-5 w-full px-3'>Sign Up</button>
+            <button className='border-[1px] bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-white h-[40px] rounded-md mt-5 w-full px-3'>Sign Up</button>
             <div className='w-full flex items-center justify-center gap-2'>
             <div className=' border-[1px] w-[40%]'></div>
             OR
@@ -125,8 +125,8 @@ const signupHandler = async()=>{
             <button onClick={signupHandler} className='border-[1px] h-[40px] rounded-md w-full px-3 flex items-center justify-center gap-2 font-semibold' type='button'><FcGoogle className='text-xl'/> Sign up with Google</button>  
             <div id='container' className={` opacity-0 bg-gradient-to-r from-[#db8d8d] to-[#d3939333]`}>Account already exist</div> 
   </form>
-  <div>Already have an account? <Link to={"/login"} className='text-teal-400'><u>Log in</u></Link></div>
-  <div className='text-teal-400'><u>Apply to be a Mentor?</u></div>
+  <div>Already have an account? <Link to={"/login"} className='bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text'><u>Log in</u></Link></div>
+  <div className='bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text'><u>Apply to be a Mentor?</u></div>
     </div>
   )
 }

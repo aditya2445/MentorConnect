@@ -98,7 +98,7 @@ if(query.get('err')){
                 }
             </div>
      
-            <button className='border-[1px] bg-teal-700 text-white h-[40px] mt-5 rounded-md w-full px-3'>Log In</button>
+            <button className='border-[1px] bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-white h-[40px] mt-5 rounded-md w-full px-3'>Log In</button>
             <div className='w-full flex items-center justify-center gap-2'>
             <div className=' border-[1px] w-[40%]'></div>
             OR
@@ -107,8 +107,8 @@ if(query.get('err')){
             <button onClick={loginHandler} className='border-[1px] h-[40px] rounded-md w-full px-3 flex items-center justify-center gap-2 font-semibold' type='button'><FcGoogle className='text-xl'/> Sign in with Google</button> 
             <div id='container' className={` opacity-0 bg-gradient-to-r from-[#db8d8d] to-[#d3939333]`}>Account doesn't exist</div>
         </form>
-        <div className='text-teal-400'><u>Forgot Password?</u></div>
-        <div>Don't have an account? <Link to={'/signup'} className='text-teal-400'><u>Sign up</u></Link></div>
+        <div className='bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text'><u>Forgot Password?</u></div>
+        <div>Don't have an account? <Link to={'/signup'} className='bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text'><u>Sign up</u></Link></div>
     </div>
   )
 }

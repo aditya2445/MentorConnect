@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import UserListItem from "../miscellaneous/UserListItem"
 import { setChats, setSelectedChat } from '../../../slice/chatSlice';
@@ -14,11 +14,8 @@ function SearchBar({onSearch}) {
   const {token} = useSelector(state=>state.auth);
   const dispatch = useDispatch();
   const [onClose,setOnClose] = useState(false);
+  const searchref = useRef()
   const handleSearch = async()=>{
-    if(!search){
-      alert("please enter Something in Search");
-      return;
-    }
     try {
       setLoading(true);
       const config = {
@@ -33,6 +30,15 @@ function SearchBar({onSearch}) {
       console.log(error.message);
     }
   }
+  useEffect(()=>{
+    const clickHandler = (event)=>{
+    if(!searchref.current.contains(event.target)) setSearch("")
+      }
+      document.addEventListener("mousedown",clickHandler)
+     return ()=>{
+      document.removeEventListener("mousedown",clickHandler)
+     }
+    })
 
 
   const accessChat = async (userId) => {
@@ -52,6 +58,7 @@ function SearchBar({onSearch}) {
       dispatch(setSelectedChat(data.users));
       setLoadingChat(false);
       setSearchResult([]);
+      setSearch("");
       setOnClose(true);
     } catch (error) {
       console.log(error.message);
@@ -59,30 +66,33 @@ function SearchBar({onSearch}) {
   };
 
   return (
-    <div className='flex justify-start flex-wrap mt-1 mb-1 relative'>
-      <form>
+    <div className='flex justify-start flex-wrap relative  w-full'>
+    <div className='flex w-full justify-between gap-3'>
+    <form className='w-full'>
         <input
             type="text"
             placeholder='Search by user or email'
             value={search}
-            onChange={(e)=>setSearch(e.target.value)}
-            className='p-2 text-sm border border-black rounded-lg text-black'
+            onChange={(e)=>{setSearch(e.target.value)
+              handleSearch()
+            }}
+            className='p-2 text-sm w-full border-black outline-none border-[1px] rounded-lg text-black'
         />
       </form>
-        <button type='submit' className='px-2 py-2 font-sans text-sm w-10 bg-green-400 min-w-fit rounded-md' onClick={handleSearch}>Search</button>
-        <div className='absolute left-2 top-10'>
+    </div>
+        { search ?
+          <div ref={searchref} style={{scrollbarWidth:'none'}} className={`absolute bg-white p-2 border-[1px] rounded-md left-2 top-10 ${searchResult.length>0 && !loading ? "h-max-[200px]" : "h-[40px]"} overflow-y-scroll`}>
           {
-            loading?(<p>Loading...</p>):(searchResult?.map((user)=>(
+            loading?(<p className='bg-white  rounded-md'>Loading...</p>):(!searchResult.length>0 ? <div className='w-full flex items-center justify-center'>No Users Found</div> :searchResult?.map((user)=>(
               <div key={user._id}>
               <UserListItem
               user={user}
               handleFunction = {()=>accessChat(user._id)}
-
               />
               </div>
             ))
           )}
-        </div>
+        </div> : <div></div>}
         </div>
   )
 }

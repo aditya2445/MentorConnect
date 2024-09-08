@@ -131,7 +131,7 @@ const ContactUs = () => {
           )
         }
        </div>
-       <div className='flex justify-end'><button className='bg-teal-500 p-2 px-5 rounded-md font-bold text-white  '>Submit</button></div>
+       <div className='flex justify-end'><button className='bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 p-2 px-5 rounded-md font-bold text-white  '>Submit</button></div>
        </form>
         </div>
         </div>

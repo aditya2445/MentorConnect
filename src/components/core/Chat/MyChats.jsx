@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { setChats, setSelectedChat } from '../../../slice/chatSlice';
 import axios from 'axios';
+import { getSenderFull } from '../../../config/chatLogics';
 
 function MyChats({fetchAgain}) {
     const [loggedUser,setLoggedUser] = useState();
@@ -35,19 +36,22 @@ function MyChats({fetchAgain}) {
     },[fetchAgain])
     console.log("chats",chats);
   return (
-    <div>
+    <div  className='mt-[100px] h-[550px] px-3 overflow-y-scroll'>
       {
         chats?(
-            (<div>
-                {chats.map((chat)=>(
-                        <div onClick={()=>dispatch(setSelectedChat(chat))}
-                        className={`${selectedChat === chat?"bg-green-600":"bg-red-400"} px-1 py-1 rounded-lg mb-1`}
+            (<div className='divide-y-[1px]  '>
+                {chats.map((chat)=>{
+                   const userDetails = getSenderFull(loggedUser,chat.users);
+                   console.log(userDetails)
+                        return <div onClick={()=>dispatch(setSelectedChat(chat))}
+                        className={`${selectedChat === chat?"bg-[#DCF8C6]":"bg-white"}  h-[60px] p-2 rounded-lg mb-1 flex items-center`}
                         key={chat._id}
-                        >
-                            {
-                                chat?getSender(loggedUser,chat.users):
-                                chat.chatName
-                            }
+                        >   
+                           <div className='flex items-center gap-x-3'>
+                            <img src={userDetails?.image ? userDetails.image : `https://api.dicebear.com/5.x/initials/svg?seed=${userDetails?.firstName} ${userDetails?.lastName }`} alt="" className='h-[40px] w-[40px] rounded-full' />
+                           <div className='flex flex-col'>
+                            <p>{userDetails.firstName+" "+userDetails.lastName}</p>
+                           
                             {
                                 chat.latestMessage && (
                                     <div className='text-sm'>
@@ -57,8 +61,10 @@ function MyChats({fetchAgain}) {
                                     </div>
                                 )
                             }
+                            </div>
+                           </div>
                         </div>
-                    ))
+})
                 }
             </div>)
         ):(<p>ChatLoading</p>)

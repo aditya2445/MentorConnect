@@ -74,18 +74,108 @@
   position: fixed;
 }
 
-.home{
-  background-image: url("./assets/Hero.png");
-  background-size: 100% auto; 
-  background-repeat: no-repeat;
-
-}
 .contact{
   background-image: url("./assets/Start%20Convert.png");
   background-size: 100% 100%; 
   object-fit: contain;
   background-repeat: no-repeat;
 }
+
+/* body{
+  margin: 0;
+  padding: 0;
+  background-color: #2f3542;
+  color: #fff;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Montserrat", sans-serif;
+} */
+
+.animated-text{
+  font-size: 34px;
+  font-weight: 600;
+  min-width: 280px;
+}
+
+.animated-text span{
+  position: relative;
+}
+
+.animated-text span::before{
+  content: "Expert Guidance";
+  background-image: linear-gradient(to right, rgb(168, 85, 247), rgb(79, 70, 229), rgb(37, 99, 235) );
+  color: transparent;
+  background-clip: text;
+  animation: words 20s infinite;
+}
+
+.animated-text span::after{
+  content: "";
+  position: absolute;
+  width: calc(100% + 8px);
+  height: 100%;
+  background-color: white;
+  border-left: 2px solid #ff7f50;
+  right: -8px;
+  animation: cursor .8s infinite, typing 20s steps(14) infinite;
+}
+
+@keyframes cursor {
+  to{
+      border-left: 2px solid #ff7f5000;
+  }
+}
+
+@keyframes words {
+  0%,20%{
+      content: "Expert Guidance";
+  }
+  21%,40%{
+      content: "Empowering Mentorship";
+  }
+  41%,60%{
+      content: "Growth Opportunities";
+  }
+  61%,80%{
+      content: "Lifelong Connections";
+  }
+  81%,100%{
+      content: "Success Pathways";
+  }
+}
+
+@keyframes typing {
+  10%,15%,30%,35%,50%,55%,70%,75%,90%,95%{
+      width: 0;
+  }
+  5%,20%,25%,40%,45%,60%,65%,80%,85%{
+      width: calc(100% + 8px);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+
+
 
 
 

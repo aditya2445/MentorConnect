@@ -17,9 +17,9 @@ const AboutUs = () => {
         <div className='flex justify-between lg:h-[552px] w-full '>
             <div className='lg:w-[45%] h-[532px] gap-y-5 flex flex-col items-start justify-evenly flex-wrap'>
                 <h1 className='text-[40px] font-bold'>About Us</h1>
-                <p className='text-[32px] font-semibold'><span className='text-orange-600'>MentorMinds</span> providing the best opportunities to the students around the glob.</p>
+                <p className='text-[32px] font-semibold'><span className='bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text'>MentorMinds</span> providing the best opportunities to the students around the glob.</p>
                 <p><i>Weekend UX, is a UI/UX Design Academy in Delhi involved in User Experience and User Interface Training and Consulting. It was started in 2023 and passionate towards User Interface Design/ User Experience Design, Human Computer Interaction Design. Humanoid is gushing towards competence to acquire knowledge and have a wide understanding towards the sphere through the foremost courses in the area of UI/UX Design, by strengthening up your skills, for your golden future</i></p>
-                <div className='flex items-center bg-blue-600 p-2 rounded-md font-bold gap-x-2 text-white'>Join Us <FaArrowRight /></div>
+                <div className='flex items-center bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 p-2 rounded-md font-bold gap-x-2 text-white'>Join Us <FaArrowRight /></div>
             </div>
             <div className='lg:w-[45%] flex-col z-20 '>
                 
@@ -36,7 +36,7 @@ const AboutUs = () => {
                 <p className='text-[32px] font-semibold'>We are always working <br/> to provide you best of   the features in all  aspects.</p>
                  <p><i>At WEEKENDUX the chief determination is to clear the minds of our students about their goals, while making them consistent in their ambitions and pushing them to be confident for their journey towards the course of time.</i></p>
                  <p><i>You will find every little thing on the internet in just a click of hand, but here we admire that without knowledge and practice the internet may even also fail you in your life.</i></p>
-                <div className='flex items-center bg-blue-600 p-2 rounded-md font-bold gap-x-2 text-white'>Learn More <FaArrowRight /></div>
+                <div className='flex items-center bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 p-2 rounded-md font-bold gap-x-2 text-white'>Learn More <FaArrowRight /></div>
             </div>
             <div className='lg:w-[45%] flex-col z-20 '>
                 
@@ -52,7 +52,7 @@ const AboutUs = () => {
             <div className='grid gap-5 rounded-md grid-cols-3 mt-10'>
               {
                aboutUs.map((item,index)=>{
-                return <div key={index} className='hover:scale-110 transition-all duration-200 flex bg-[#f0f7f2] gap-y-2 flex-col rounded-md p-3 h-[236px] w-[376px] items-start'>
+                return <div key={index} className='hover:scale-110 transition-all duration-200 flex bg-[#f0f7f2]   gap-y-2 flex-col rounded-md p-3 h-[236px] w-[376px] items-start'>
                     <img src={item.image} alt=''/>
                     <p className='text-xl font-bold'>{item.title}</p>
                     <p><i>{item.desc}</i></p>
