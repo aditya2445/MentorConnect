@@ -80,6 +80,11 @@ export const Admin = [
         icon:"VscGraph"
     },
     {
+        name:"users Activity",
+        linkto:"/dashboard/users/mentors",
+        icon:"VscAccount"
+    },
+    {
         name:"Applications",
         linkto:"/dashboard/applications",
         icon:"VscCodeOss"
@@ -89,7 +94,6 @@ export const Admin = [
         linkto:"/dashboard/create-category",
         icon:"VscEdit"
     },
-
     {
         name:"Settings",
         linkto:"/dashboard/settings",

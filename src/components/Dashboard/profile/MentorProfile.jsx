@@ -22,7 +22,6 @@ const MentorProfile = () => {
     }
     fetchUserDetails()
     },[])
-   
   return (
     <div className='w-full flex items-center justify-center relative'>
         <img className={`absolute top-[-70px] rounded-md w-[920px]  h-[169px]  z-10`} src={wallpaper} alt=''/>
@@ -51,13 +50,13 @@ const MentorProfile = () => {
                   <fieldset className='flex flex-col w-full border-[1px] p-3 rounded-md h-[25%]'>
                   <legend className='px-2 font-bold'> <i>About {profileDetails?.firstName}</i></legend>
 
-                        <p className='text-sm'>{profileDetails?.additionalDetails?.about}</p>
+                        <p className='text-sm'>{profileDetails?.additionalDetails?.about?.substring(0,100)}...</p>
                     </fieldset>
 
                     <fieldset className='flex w-full flex-col border-[1px] p-3 rounded-md h-[18%]'>
                     <legend className='px-2 font-bold'><i>Acheivements</i> </legend>
 
-                        <p className='text-sm'>{profileDetails?.additionalDetails?.achievements}</p>
+                        <p className='text-sm'>{profileDetails?.additionalDetails?.achievements?.substring(0,60)}...</p>
                     </fieldset>
                 
 
@@ -79,9 +78,9 @@ const MentorProfile = () => {
                    <fieldset className='flex items-center w-full border-[1px] p-2 rounded-md'>
                    <legend className='px-2 font-bold'><i>Skills</i></legend>
                     {
-                        profileDetails?.skills ? (<div>{
-                            JSON.parse(profileDetails?.Skills)?.map((skill,index)=>{
-                                return <p key={index} className='text-sm'>{skill}</p>
+                        profileDetails?.skills ? (<div className='flex gap-2 '>{
+                            JSON.parse(profileDetails?.skills)?.slice(0,2).map((skill,index)=>{
+                                return <p key={index} className='text-sm text-white bg-green-500 p-1 rounded-md'>{skill}</p>
                             })
                            }</div>) : (<p className='text-sm'>No skills found</p>)
                     }

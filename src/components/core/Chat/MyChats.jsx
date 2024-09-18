@@ -40,24 +40,24 @@ function MyChats({fetchAgain}) {
       {
         chats?(
             (<div className='divide-y-[1px]  '>
-                {chats.map((chat)=>{
-                   const userDetails = getSenderFull(loggedUser,chat.users);
+                {chats?.map((chat)=>{
+                   const userDetails = getSenderFull(loggedUser,chat?.users);
                    console.log(userDetails)
                         return <div onClick={()=>dispatch(setSelectedChat(chat))}
                         className={`${selectedChat === chat?"bg-[#DCF8C6]":"bg-white"}  h-[60px] p-2 rounded-lg mb-1 flex items-center`}
                         key={chat._id}
                         >   
                            <div className='flex items-center gap-x-3'>
-                            <img src={userDetails?.image ? userDetails.image : `https://api.dicebear.com/5.x/initials/svg?seed=${userDetails?.firstName} ${userDetails?.lastName }`} alt="" className='h-[40px] w-[40px] rounded-full' />
+                            <img src={userDetails?.image ? userDetails?.image : `https://api.dicebear.com/5.x/initials/svg?seed=${userDetails?.firstName} ${userDetails?.lastName }`} alt="" className='h-[40px] w-[40px] rounded-full' />
                            <div className='flex flex-col'>
-                            <p>{userDetails.firstName+" "+userDetails.lastName}</p>
+                            <p>{userDetails?.firstName+" "+userDetails?.lastName}</p>
                            
                             {
-                                chat.latestMessage && (
+                                chat?.latestMessage && (
                                     <div className='text-sm'>
-                                        {chat.latestMessage.content.length > 50
-                                        ? chat.latestMessage.content.substring(0, 51) + "..."
-                                        : chat.latestMessage.content}
+                                        {chat?.latestMessage?.content?.length > 50
+                                        ? chat?.latestMessage?.content?.substring(0, 51) + "..."
+                                        : chat?.latestMessage?.content}
                                     </div>
                                 )
                             }

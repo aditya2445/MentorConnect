@@ -20,7 +20,8 @@ import { useNavigate } from 'react-router-dom'
 import Footer from '../components/Footer'
 import Group1 from '../assets/Group1.png'
 import Group2 from '../assets/Group2.png'
-import { IoCalendarOutline } from "react-icons/io5";
+import Group22 from '../assets/Group\ 22.png'
+import student from '../assets/student.png'
 
 
 const Home = () => {
@@ -35,7 +36,7 @@ const Home = () => {
        <h1> We Provide You With</h1> <span className=''></span>
     </div>
     <div>
-    <button className='bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-white p-3 rounded-l-2xl rounded-b-2xl font-semibold'>Book Your Free Demo</button>
+    <button onClick={()=>navigate("/login")} className='bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-white p-3 rounded-l-2xl rounded-b-2xl font-semibold'>Book Your Free Demo</button>
 
     </div>
       <div className='flex flex-col gap-y-5'>
@@ -85,9 +86,28 @@ const Home = () => {
    <h1 className='text-4xl font-bold'>What is <span className=' bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text'>MentConnect?</span> </h1>
    <p className='text-[22px] text-center'><span className=' bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-600 text-transparent bg-clip-text'>MentConnect</span> is a web platform that connects mentees with industry mentors for <br/> personalized career guidance, skill development, and job referrals. </p>
    <div className='flex items-center justify-evenly w-full mt-10'>
-    <div className='w-[350px] h-[250px] border-[1px]'></div>
-    <div className='w-[350px] h-[250px] border-[1px]'></div>
-   </div>
+      <div className='relative group w-[450px] h-[350px] border-[1px] rounded-md overflow-hidden'>
+        <img src={Group22} alt="Group 22" className='w-full h-full object-cover' />
+        <div className='absolute inset-0 group-hover:bg-black group-hover:bg-opacity-50 transition-all duration-700'></div>
+        <div className='absolute inset-0 flex  flex-col gap-5 items-center justify-center transition-transform duration-700 transform translate-y-full group-hover:translate-y-0'>
+        <p className='text-3xl font-bold text-white'>For Mentees</p>
+          <button onClick={()=>navigate('/apply-mentor')} className='bg-transparent border-[1px] border-white text-white font-semibold py-3 px-4 rounded-3xl'>
+          Become A Mentor
+          </button>
+        </div>
+      </div>
+
+      <div className='relative group w-[450px] h-[350px] border-[1px] rounded-md overflow-hidden'>
+        <img src={student} alt="Student" className='w-full h-full object-cover' />
+        <div className='absolute inset-0 group-hover:bg-black group-hover:bg-opacity-50 transition-all duration-700'></div>
+        <div className='absolute inset-0 flex flex-col gap-5 items-center justify-center transition-transform duration-700 transform translate-y-full group-hover:translate-y-0'>
+          <p className='text-3xl font-bold text-white'>For Mentors</p>
+          <button className='bg-transparent border-[1px] border-white text-white font-semibold py-3 px-4 rounded-3xl'>
+           Book Demo
+          </button>
+        </div>
+      </div>
+    </div>
    </div>
    {/* Section 4 */}
    <div className='w-10/12 flex flex-col items-center mt-24  justify-center gap-y-5 '>

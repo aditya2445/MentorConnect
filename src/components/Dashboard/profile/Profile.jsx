@@ -8,7 +8,8 @@ const Profile = () => {
   return (
     <div className='flex items-center w-full justify-center mt-24 '>
       {user?.accountType === "Mentor" && <MentorProfile/>}
-      {user?.accountType === "Mentee" && <MenteeProfile/>}
+      {user?.accountType === "Mentee"  && <MenteeProfile/>}
+      {user?.accountType === "Admin" && <MenteeProfile/>}
     </div>
   )
 }

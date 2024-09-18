@@ -23,6 +23,7 @@ const dotenv = require("dotenv");
 // require("./cron-jobs/cleanEnrollments")
 require('./controllers/google')
 const bodyParser = require("body-parser")
+const run = require("./OpenAiService")
 app.use(bodyParser.json({ limit: '35mb' }));
 app.use(bodyParser.urlencoded({
   extended: true,
@@ -78,6 +79,23 @@ const io = require("socket.io")(server,{
         origin:"http://localhost:5173",
     },
 });
+
+app.post('/api/openai', async (req, res) => {
+    const { prompt } = req.body;  // Extract the prompt from the request body
+  
+    // Validate the prompt input
+    if (!prompt) {
+      return res.status(400).json({ error: 'Prompt is required' });
+    }
+  
+    try {
+      const result = await run(prompt); // Use the chatGPTAPI method to process the text prompt
+      return res.json({ result }); // Return the result in JSON format
+    } catch (error) {
+      console.error('Error calling OpenAI:', error);
+      return res.status(500).json({ error: 'An error occurred while processing your request' });
+    }
+  });
 
 io.on("connection",(socket)=>{
     console.log("Connected to Socket.io");  

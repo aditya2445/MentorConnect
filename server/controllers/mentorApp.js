@@ -1,4 +1,7 @@
+const Category = require("../models/Category");
 const MentorApp = require("../models/MentorApp");
+const Profile = require("../models/Profile");
+const User = require("../models/User");
 
 exports.createMentorApp = async(req,res)=>{
  try {
@@ -69,4 +72,84 @@ try {
         message:"Unable to fetch the application", 
       }) 
 }   
+}
+
+exports.getAllMentorsApp = async(req,res)=>{
+    try {
+        const pendingApps = await MentorApp.find({state:"Pending"}).populate("category").exec()
+        const AcceptedApps = await MentorApp.find({state:"Accepted"}).populate("category").exec()
+        const RejectedApps = await MentorApp.find({state:"Rejected"}).populate("category").exec()
+        return res.status(200).json({
+            success:true,
+            message:"Mentor Applications fetched",
+            data:{
+                pendingApps,
+                AcceptedApps,
+                RejectedApps
+            }
+        })
+    } catch (error) {
+        return res.status(500).json({
+          success:false,
+          message:"Unable to fetch the applications",
+        })
+    }
+}
+
+exports.AcceptMentor = async(req,res)=>{
+    try {
+       const {MentorId,userId,firstName,lastName,image,jobTitle,company,address,linkedInUrl,githubUrl,skills,whyDoYouWantToBecomeMentor,about,achievements,category} = req.body;
+       const user = await User.findByIdAndUpdate(userId,{
+        firstName:firstName,
+        lastName:lastName,
+        image:image,
+        accountType:"Mentor",
+        category:category._id,
+        skills:skills
+       },{new:true})
+       const profile = await Profile.findByIdAndUpdate(user.additionalDetails,{
+       jobTitle:jobTitle,
+       company:company,
+       address:address,
+       linkedInUrl:linkedInUrl,
+       githubUrl:githubUrl,
+       about:about,
+       whyDoYouWantToBecomeMentor:whyDoYouWantToBecomeMentor,
+       achievements:achievements
+       },{new:true})
+
+     const mentorApp = await MentorApp.findByIdAndUpdate(MentorId,{
+       state:"Accepted"
+     },{new:true})
+
+      await Category.findByIdAndUpdate(category._id,{$push:{mentors:userId}},{new:true})
+
+     return res.status(200).json({
+        success:true,
+        message:"Mentor Application Accepted",
+     }) 
+    } catch (error) {
+       return res.status(500).json({
+        success:false,
+        message:"Unable to Accept Mentor Application", 
+       })  
+    }
+}
+
+exports.RejectMentor = async(req,res)=>{
+    try {
+        const MentorId = req.body.data;
+        const mentorApp = await MentorApp.findByIdAndUpdate(MentorId,{
+        state:"Rejected"
+        },{new:true})
+        return res.status(200).json({
+        success:true,
+        message:"Mentor Application Rejected",
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success:false,
+            message:"Unable to Reject Mentor Application",
+        })
+    }
 }

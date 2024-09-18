@@ -58,16 +58,16 @@
 }
 
 .container{
-  scale: 0;
+  visibility: hidden;
 }
 .active{
-  scale:1;
+  visibility: visible;
  transition:all;
- transition-duration: 0.6s; 
+  transition-duration:0.5s; 
 }
 .overlay {
   background-color: #5f5f5f83;
-
+  
 }
 
 .fixed{

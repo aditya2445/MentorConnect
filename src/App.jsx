@@ -26,11 +26,21 @@ import Mentors from './pages/Mentors'
 import Posts from './pages/Posts'
 import ShowPost from './components/core/post/ShowPost'
 import MyPosts from './components/core/post/MyPosts'
+import Applicant from './components/Dashboard/Applications/Applicant'
+import Analytics from './components/Dashboard/Analytics/Analytics'
+import Users from './components/Dashboard/Analytics/Users'
+import AllMentors from './components/Dashboard/Analytics/AllMentors'
+import AllMentees from './components/Dashboard/Analytics/AllMentees'
+import AllEvents from './components/Dashboard/Analytics/AllEvents'
+import AllPosts from './components/Dashboard/Analytics/AllPosts'
+import Settings from './components/Dashboard/Setting'
+import CreatePremium from './components/premium/CreatePremium'
+import MyMentors from './components/Dashboard/MyMentors.jsx/MyMentors'
+import MyMentees from './components/Dashboard/MyMentees/MyMentees'
 
 function App() {
   const {user} = useSelector(state=>state.profile)
   const {token} = useSelector(state=>state.auth)
-
     const location = useLocation();
     const hideNavbarRoutes = ['/login', '/signup','/verifyEmail'];
 
@@ -45,6 +55,8 @@ function App() {
       </>}
       <Route path='contact-us' element={<ContactUs/>} />
       <Route path='/verifyEmail' element={<VerifyEmail/>}/>
+      <Route path='/create-premium' element={<CreatePremium/>}/>
+
       <Route path='/mentors' element={<Mentors/>}/>
       <Route path='/about-us' element={<AboutUs/>}/>
       <Route path='/posts' element={<Posts/>}/>
@@ -56,20 +68,31 @@ function App() {
       <Route path='/resume/review' element={<ReviewAResume/>}/>
       
       <Route path='/apply-mentor' element={<Mentor/>}/>
-      <Route path='*' element={<Error/>}/>
       <Route element={<PrivateRoute><Dashboard/></PrivateRoute>}>
        <Route path='/dashboard/my-profile' element={<Profile/>}/>
        <Route path='/dashboard/video-calls' element={<VideoCalls/>}/>
        <Route path='/video-calls/:roomId' element={<Room/>}/>
        <Route path='/dashboard/sessions' element={<Sessions/>}/>
-      <Route path='/dashboard/time-slots' element={<TimeSlots />}/>
+       <Route path='/dashboard/time-slots' element={<TimeSlots />}/>
        <Route path='/dashboard/chats' element={<Chat/>}/>
+       <Route path='/dashboard/applications' element={<Applicant/>}/>
+       <Route path='/dashboard/settings' element={<Settings/>}/>
+       <Route path='/dashboard/analytics' element={<Analytics/>}/>
+       <Route path='/dashboard/my-mentors' element={<MyMentors/>}/>
+       <Route path='/dashboard/my-mentees' element={<MyMentees/>}/>
+        <Route element={<Users/>}>
+        <Route path='/dashboard/users/mentors' element={<AllMentors/>}/>
+        <Route path='/dashboard/users/mentees' element={<AllMentees/>}/>
+        <Route path='/dashboard/users/events' element={<AllEvents/>}/>
+        <Route path='/dashboard/users/posts' element={<AllPosts/>}/>
+        </Route>
       </Route>
-      <Route>
+  
         <Route path='/premium' element={<PremDetails/>}/>
         <Route path="/premium/:sectionId" element={<PremiumSectionDetails />} />
-      </Route>
+
       <Route path='*' element={<Error/>}/>
+
     </Routes>
     </>
   )

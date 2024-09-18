@@ -4,6 +4,8 @@ const otpGenerator = require("otp-generator")
 const bcrypt = require('bcrypt')
 const jwt = require("jsonwebtoken")
 const Profile =require('../models/Profile')
+const Session = require('../models/sessionModel')
+const Post = require("../models/postModel")
 require("dotenv").config()
 
 
@@ -195,15 +197,7 @@ exports.getUserDetails = async(req,res)=>{
         const userId = req.user._id;
        
         const user = await User.findById(userId)
-        // .populate({
-        //     path:"additionalDetails",
-        //     populate:{
-        //         path:"education"
-        //     },
-        //     populate:{
-        //         path:"projects"
-        //     }
-        // })
+        .populate("additionalDetails")
         .populate("category").exec()
         return res.status(200).json({
            success:true,
@@ -252,3 +246,126 @@ exports.mentors = async (req, res) => {
     const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
     res.send(users);
   };
+
+exports.getAllUsers = async(req,res)=>{
+    try {
+        const users = await User.find({_id:{$ne:req.user._id}})
+       .populate("category").populate("additionalDetails").populate("mentees").populate("mentors").exec();
+       const events = await Session.find().populate("mentor").populate("mentee").exec();
+       const posts = await Post.find().populate("owner").exec()
+       res.status(200).json({
+        success:true,
+        message:"All Users Fetched",
+        data:{
+            users,
+            events,
+            posts
+        }
+       })
+    } catch (error) {
+       return res.status(500).json({
+        success:false,
+        message:"Unable to fetch all users",
+       }) 
+    }
+}
+
+exports.myMentees = async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const user = await User.findById(userId).populate("mentees").exec();
+        
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Mentees fetched successfully",
+            data: user.mentees,
+        });
+    } catch (error) {
+        console.error("Fetching mentors error:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Unable to fetch mentors",
+        });
+    }
+};
+
+exports.myMentors = async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const user = await User.findById(userId).populate("mentors").exec();
+        
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Mentors fetched successfully",
+            data: user.mentors,
+        });
+    } catch (error) {
+        console.error("Fetching mentors error:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Unable to fetch mentors",
+        });
+    }
+};
+
+exports.changePass = async (req, res) => {
+    try {
+        const { oldPass, newPass } = req.body;
+        if (!oldPass || !newPass) {
+            return res.status(400).json({
+                success: false,
+                message: "Please provide all the fields",
+            });
+        }
+        const userId = req.user._id;
+        console.log(userId);
+        // Find the user by ID
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found",
+            });
+        }
+        // Check if the old password matches the current password
+        console.log(user.password);
+        const isMatch = await bcrypt.compare(oldPass, user.password);
+        if (!isMatch) {
+            return res.status(400).json({
+                success: false,
+                message: "Old password is incorrect",
+            });
+        }
+
+        // Hash the new password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(newPass, salt);
+
+        // Update the user's password using findByIdAndUpdate
+        const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            { password: hashedPassword },
+            { new: true }
+        );
+
+        return res.status(200).json({
+            success: true,
+            message: "Password updated successfully!",
+            updatedUser, // Optionally return the updated user data
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            success: false,
+            message: "Password update failed",
+        });
+    }
+};

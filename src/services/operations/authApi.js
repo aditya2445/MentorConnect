@@ -4,7 +4,7 @@ import { setLoading,setToken } from '../../slice/authSlice'
 import { apiConnector } from '../apiConnector'
 import { setUser } from '../../slice/profileSlice'
 
-const {SIGNUP_API,LOGIN_API,SENDOTP_API,GET_USER_DETAILS,CONTACT_US_API} = auth
+const {SIGNUP_API,LOGIN_API,SENDOTP_API,GET_USER_DETAILS,CONTACT_US_API,GET_ALL_USERS,GET_MY_MENTEES,GET_MY_MENTORS} = auth
 
 export function sendOtp(email,navigate){
  return async(dispatch)=>{
@@ -57,10 +57,11 @@ export function login(email,password,navigate){
           
             dispatch(setToken(response?.data?.user?.token))
             const userImage = `https://api.dicebear.com/5.x/initials/svg?seed=${response?.data?.user?.firstName} ${response?.data?.user?.lastName }`
-            dispatch(setUser({ ...response?.data?.user, image: userImage }))
-          
+            if(response?.data?.user?.image){dispatch(setUser(response?.data?.user))}
+            else dispatch(setUser({ ...response?.data?.user, image: userImage }))
             localStorage.setItem("token", JSON.stringify(response?.data?.user?.token))
-                localStorage.setItem("user", JSON.stringify({ ...response?.data?.user, image: userImage }))
+            if(response?.data?.user?.image)localStorage.setItem("user", JSON.stringify(response?.data?.user))
+            else localStorage.setItem("user", JSON.stringify({ ...response?.data?.user, image: userImage }))
           
            navigate('/')
           } catch (error) {
@@ -113,5 +114,52 @@ export async function contactUs(data){
     toast.error("unable to submit the form")
   }
   toast.dismiss(toastId)
+}
+
+export async function getAllUsers(token){
+let res;
+try {
+  const response = await apiConnector("GET",GET_ALL_USERS,null,{
+    Authorization : `Bearer ${token}`
+  })
+  if(!response?.data?.success){
+    throw new Error("users unavailable")
+  }
+  res = response?.data?.data
+} catch (error) {
+  console.log("something went wrong while getting users")
+}
+return res;
+}
+
+export async function myMentees(token) {
+  let res;
+  try {
+    const response = await apiConnector("GET", GET_MY_MENTEES, null, {
+      Authorization: `Bearer ${token}`,
+    });
+    if (!response?.data?.success) {
+      throw new Error("Mentors not found");
+    }
+    res = response?.data?.data;
+  } catch (error) {
+    console.log("Mentors not found:", error.message);
+  }
+  return res;
+}
+export async function myMentors(token) {
+  let res;
+  try {
+    const response = await apiConnector("GET", GET_MY_MENTORS, null, {
+      Authorization: `Bearer ${token}`,
+    });
+    if (!response?.data?.success) {
+      throw new Error("Mentors not found");
+    }
+    res = response?.data?.data;
+  } catch (error) {
+    console.log("Mentors not found:", error.message);
+  }
+  return res;
 }
 
