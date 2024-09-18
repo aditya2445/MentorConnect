@@ -89,11 +89,11 @@ export const Admin = [
         linkto:"/dashboard/applications",
         icon:"VscCodeOss"
     },
-    {
-        name:"Create Category",
-        linkto:"/dashboard/create-category",
-        icon:"VscEdit"
-    },
+    // {
+    //     name:"Create Category",
+    //     linkto:"/dashboard/create-category",
+    //     icon:"VscEdit"
+    // },
     {
         name:"Settings",
         linkto:"/dashboard/settings",
